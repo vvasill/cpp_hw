@@ -210,40 +210,34 @@ crs_matrix* crs_matrix::operator- (const crs_matrix* that)
 	return res_ptr;
 }
 
-crs_matrix crs_matrix::operator* (const crs_matrix& A)
+crs_matrix* crs_matrix::operator* (const crs_matrix* that)
 {
-	crs_matrix C;
-    int d1, d2;
-
-	if (_col == A._row) 
+	if (_col == that->_row) 
 	{
-        int *X = new int[A._col];
-        
-		for (int i = 0; i < _col; i++)
-		{ X[i] = 0; }
+		crs_matrix* res_ptr = new crs_matrix();
+		int d = 0, d1, d2;
 
-        C._CI = new int[_SII[_row] + A._SII[A._row]];
-        C._SII = new int[_row + 1];
-        C._row = _row;
-        C._col = A._col;
+        int *X = new int[that->_col];
+        for (int i = 0; i < that->_col; i++) 
+			X[i] = 0;
 
-        int d = 0;
+        res_ptr->_CI = new int[_nzn + that->_nzn];
+        res_ptr->_SII = new int[_row + 1];
+        res_ptr->_row = _row;
+        res_ptr->_col = that->_col;
 
         for (int i = 0; i < _row; i++) 
 		{
-            C._SII[i] = d;
-            
-			for (int j = _SII[i]; j < _SII[i + 1]; j++) 
+            res_ptr->_SII[i] = d;
+            for (int j = _SII[i]; j < _SII[i + 1]; j++) 
 			{
                 d1 = _CI[j];
-                
-				for (int k = A._SII[d1]; k < A._SII[d1 + 1]; k++) 
+                for (int k = that->_SII[d1]; k < _SII[d1 + 1]; k++) 
 				{
-                    d2 = A._CI[k];
-                    
-					if (X[d2] != i + 1) 
+                    d2 = that->_CI[k];
+                    if (X[d2] != i + 1) 
 					{
-                        C._CI[d] = d2;
+                        res_ptr->_CI[d] = d2;
                         d++;
                         X[d2] = i + 1;
                     }
@@ -251,54 +245,44 @@ crs_matrix crs_matrix::operator* (const crs_matrix& A)
             }
         }
 
-        C._SII[_row] = d;
-        
-		if (d < _SII[_row] + A._SII[A._row]) 
+        res_ptr->_SII[_row] = d;
+        if (d < _SII[_row] + that->_SII[that->_row]) 
 		{
             int *tmp_CI = new int[d];
+            for (int i = 0; i < d; i++)
+                tmp_CI[i] = res_ptr->_CI[i];
             
-			for (int i = 0; i < d; i++) 
-			{ tmp_CI[i] = C._CI[i]; }
-            
-			delete[] C._CI;
-            
-			C._CI = tmp_CI;
+            delete [] res_ptr->_CI;
+            res_ptr->_CI = tmp_CI;
         }
 
         double number;
 
-        C._MEl = new double[d];
-        double *XI = new double[C._col];
-        
-		for (int i = 0; i < _row; i++) 
+        res_ptr->_MEl = new double[d];
+        double *XI = new double[res_ptr->_col];
+        for (int i = 0; i < _row; i++)
 		{
-            for (int k = C._SII[i]; k < C._SII[i + 1]; k++) 
-			{ XI[C._CI[k]] = 0; }
+            for (int k = res_ptr->_SII[i]; k < res_ptr->_SII[i + 1]; k++)
+				XI[res_ptr->_CI[k]] = 0;
             
-			for (int k = _SII[i]; k < _SII[i + 1]; k++)
-			{ d1 = _CI[k];
+            for (int k = _SII[i]; k < _SII[i + 1]; k++) 
+			{
+                d1 = _CI[k];
                 number = _MEl[k];
-                
-				for (int j = A._SII[d1]; j < A._SII[d1 + 1]; j++) 
+                for (int j = that->_SII[d1]; j < that->_SII[d1 + 1]; j++) 
 				{
-                    d2 = A._CI[j];
-                    XI[d2] += number * A._MEl[j];
+                    d2 = that->_CI[j];
+                    XI[d2] += number * that->_MEl[j];
                 }
             }
-
-            for (int k = C._SII[i]; k < C._SII[i + 1]; k++) 
-			{ C._MEl[k] = XI[C._CI[k]]; }
+            for (int k = res_ptr->_SII[i]; k < res_ptr->_SII[i + 1]; k++)
+				res_ptr->_MEl[k] = XI[res_ptr->_CI[k]];
         }
 
-		C._nzn = C._SII[_row];
-
-        return C;
+        return res_ptr;
     } 
 	else
-	{
-        cout << "These matricies have unequal sizes" << endl;
-        return *this;
-    }
+		throw length_error("operation is forbidden");
 }
 
 //----------------------------------------------------------------------

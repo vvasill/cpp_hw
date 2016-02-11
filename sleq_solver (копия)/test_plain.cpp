@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	matrix *x_ptr = new plain_matrix(n, 1);
 	matrix *x_temp_ptr = new plain_matrix(n, 1);
 	matrix *a_ptr = new plain_matrix(n, n+1);
-	
+
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n+1; j++)
 		{
@@ -44,6 +44,10 @@ int main(int argc, char* argv[])
 	a_ptr->print();
 
 	gauss(a_ptr, x_ptr);
+	cout << "answer:" << endl;
+	x_ptr->print();
+
+	min_res(a_ptr, x_ptr, x_temp_ptr);
 	cout << "answer:" << endl;
 	x_ptr->print();
 

@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdlib>
+
+#ifndef LINALG_H
+	#include "linalg.h"
+#endif
+
+using namespace std;
+
+bool gauss(matrix* a, matrix* x)
+{
+    double temp;
+	double max;
+	int col_max;
+	int row = a->row();
+	int col = a->col();
+
+    for (int j = 0; j < col-1; j++)
+	{
+		//max element searching
+		max = get(j, 0);
+		col_max = 0;
+		for(int k = 1; j < col-1; j++)
+			if (get(i,k) > max)
+			{
+				max = get(i,k);
+				col_max = k;
+			}
+
+		//column swap : 0 and col_max
+		for(int i = 0; i < row; i++)
+		{
+			temp = a->get(i, col_num);
+			a->set(i, col_num, a->get(i, 0));
+			a->set(i, 0, temp);
+		}
+
+		a->print();
+
+        /*for (int i = j+1; i < row; i++)
+        {				
+			cout << a->get(j, j) << endl;
+            temp = a->get(i, j) / a->get(j, j);
+			
+            for (int k = j; k < col; k++)
+				a->set(i, k, a->get(i, k) - temp * a->get(j, k));
+        }*/
+	}
+    
+    /*x->set(row-1, 0, a->get(row-1, col-1) / a->get(row-1, row-1));
+
+	for (int i = row-2; i >= 0; i--)
+    {
+        temp = a->get(i, col-1);
+        for (int j = row-1; j > i; j--)
+            temp -= a->get(i, j) * x->get(j, 0);
+        x->set(i, 0, temp / a->get(i, i));
+    }*/
+	
+	return true;
+}

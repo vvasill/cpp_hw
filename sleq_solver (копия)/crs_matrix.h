@@ -40,7 +40,7 @@ class crs_matrix : public matrix
 	
 		crs_matrix* operator+ (const crs_matrix* that);	
 		crs_matrix* operator- (const crs_matrix* that);	
-		crs_matrix operator* (const crs_matrix& that);
+		crs_matrix* operator* (const crs_matrix* that);
 };
 
 #endif // CRS_MATRIX_H
