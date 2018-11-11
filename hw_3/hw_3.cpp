@@ -15,17 +15,16 @@ int main( int argc, char* argv[] )
 	cin >> min;
 	cin >> max;
 
-	int_arr *arr = new int_arr(size);
+	int_arr *arr1 = new int_arr(size);
+	int_arr *arr2 = new int_arr(size);
 
-	arr->init(min, max);
-	arr->print_arr();
-	arr->sort_arr();
-	arr->print_arr();
+	arr1->init(min, max);
+	arr2->init(min, max);
+	arr1->print_arr();
+	arr2->print_arr();
 
-	arr->check_size();
-	arr->increase_size(1);
-	arr->check_size();
-	
+	(arr1+arr2)->print_arr();
+
 	return 0;	
 	
 }
