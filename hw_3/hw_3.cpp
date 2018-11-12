@@ -24,7 +24,7 @@ int main( int argc, char* argv[] )
 	arr1->print_arr();
 	arr2->print_arr();
 
-	arr3 = arr1 + arr2;
+	arr1+arr2;
 
 	return 0;	
 	

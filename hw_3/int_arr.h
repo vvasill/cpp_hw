@@ -12,8 +12,10 @@ class int_arr
 		~int_arr();	
 
 		//int operator[] (const int) const;
-		int_arr operator+ (const int_arr arr);
+		int_arr& operator+= (const int_arr& arr);
+		friend int_arr& operator+ (int_arr lhs, const int_arr& rhs);
 	
+		int_arr sum(int_arr* arr);
 		int size();
 		void init( int min, int max );	
 		void print_arr();

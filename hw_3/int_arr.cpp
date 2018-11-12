@@ -38,17 +38,31 @@ int_arr::~int_arr()
 	return _arr[i];
 }*/
 
-int_arr int_arr::operator +(const int_arr sm)
+int_arr& operator+=(const int_arr& rhs)
 {
-	int_arr *result;
-	int i,j;
+	for(i = 0; i < rhs->_size; i++)
+		this->_arr[this->_size + i] = rhs->_arr[i];
+	this->_size += rhs->_size
 
-	result->_size = this->_size + sm._size;
+	return *this;
+}
+
+friend operator+(int_arr lhs, const int_arr& rhs)
+{
+	lhs += rhs;
+	return lhs;
+}
+
+int_arr int_arr::sum(int_arr* s_arr)
+{
+	int i,j,size;
+	size = this->_size + s_arr->_size;
+	int_arr *result = new int_arr(size);
 
 	for(i = 0; i < this->_size; i++)
 		result->_arr[i] = this->_arr[i];
-	for(j = this->_size; j < sm._size; j++)
-		result->_arr[j] = sm._arr[j];
+	for(j = this->_size; j < s_arr->_size; j++)
+		result->_arr[j] = s_arr->_arr[j];
 
 	return *result;
 }
