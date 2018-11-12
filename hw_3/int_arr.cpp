@@ -7,38 +7,61 @@ using namespace std;
 int_arr::int_arr( int size )
 {
  	
-	arr = new int [size];
-	arr_size = size;
+	_arr = new int [size];
+	_size = size;
 
 };
 
 int_arr::int_arr()
 {
 
-	arr = NULL;
-	arr_size = 0;
+	_arr = NULL;
+	_size = 0;
 
 };
 
 int_arr::~int_arr()
 {
 
-	if ( arr != NULL )	
-		delete [] arr;
+	if ( _arr != NULL )	
+		delete [] _arr;
 
 };
 
+int& int_arr::operator[] (const int i) const
+{
+	if (i >= _size) 
+	{ 
+		cout << "index out of range"; 
+		exit(0); 
+	} 
+	return _arr[i];
+}
+
+int_arr& int_arr::operator +(const int_arr& sm)
+{
+	int i,j;
+	this->_size = _size + sm._size;
+
+	for(i = 0; i < _size; i++)
+		this->data[i] = data[i];
+	for(j = _size; j < sm._size; j++)
+		this->data[j] = sm.data[j];
+
+	return *this;
+}
+
 int int_arr::size()
 {
-	return(arr_size);
+	return(_size);
 }
 
 void int_arr::init( int min, int max )
 {
 
-	for( int i = 0; i < arr_size; i++ )
+	for( int i = 0; i < _size; i++ )
 	{
-		arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
+		_arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
 	}
 
 }
@@ -46,9 +69,9 @@ void int_arr::init( int min, int max )
 void int_arr::print_arr()
 {
 	
-	for( int i = 0; i < arr_size; i++ )
+	for( int i = 0; i < _size; i++ )
 	{
-		cout << arr[i] << " ";
+		cout << _arr[i] << " ";
 	}
 	cout << endl;
 
@@ -70,7 +93,7 @@ bool int_arr::check_size()
 	int size;
 	bool check;
 
-	size = sizeof(arr) + (sizeof(int) * arr_size);
+	size = sizeof(_arr) + (sizeof(int) * _size);
 	if (size < 5*1024) 
 		check = true;
 	else 
@@ -83,25 +106,25 @@ bool int_arr::check_size()
 void int_arr::increase_size( int inc )
 {
 
-	int_arr *temp_arr = new int_arr(arr_size + inc);
-	delete [] arr;	
-	*arr = *temp_arr->arr;
-	arr_size = temp_arr->arr_size;
+	int_arr *temp_arr = new int_arr(_size + inc);
+	delete [] _arr;	
+	*_arr = *temp_arr->_arr;
+	_size = temp_arr->_size;
 
 }
 
 void int_arr::sort_arr()
 {
 		
-	int n = arr_size;
+	int n = _arrsize;
 	bool swapped;
     do
 	{
       	swapped = false;
         for ( int i = 1; i < n; i++ )
-            if ( arr[i-1] > arr[i] )
+            if ( _arr[i-1] > _arr[i] )
 			{
-                swap(arr[i-1], arr[i]);
+                swap(_arr[i-1], _arr[i]);
                 swapped = true;
 			}
         n--;

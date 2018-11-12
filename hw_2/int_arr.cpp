@@ -7,56 +7,38 @@ using namespace std;
 int_arr::int_arr( int size )
 {
  	
-	arr_ = new int [size];
-	size_ = size;
+	_arr = new int [size];
+	_size = size;
 
 };
 
 int_arr::int_arr()
 {
 
-	arr_ = NULL;
-	size_ = 0;
+	_arr = NULL;
+	_size = 0;
 
 };
 
 int_arr::~int_arr()
 {
 
-	if ( arr != NULL )	
-		delete [] arr_;
+	if ( _arr != NULL )	
+		delete [] _arr;
 
 };
 
 int int_arr::size()
 {
-	return(size_);
-}
-
-int& int_arr::operator[] (const int i) const
-{
-	if (i >= size_) 
-	{ 
-		cout << "index out of range"; 
-		exit(0); 
-	} 
-	return arr_[i];
-}
-
-int_arr int_arr::operator+ (int_arr& arr)
-{
-      int_arr result;
-      result.arr_ = this->arr_;
-      result.size_ = (this->size_);
-      return result;
+	return(_size);
 }
 
 void int_arr::init( int min, int max )
 {
 
-	for( int i = 0; i < size_; i++ )
+	for( int i = 0; i < _size; i++ )
 	{
-		arr_[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
+		_arr_[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
 	}
 
 }
@@ -64,9 +46,9 @@ void int_arr::init( int min, int max )
 void int_arr::print_arr()
 {
 	
-	for( int i = 0; i < size_; i++ )
+	for( int i = 0; i < _size; i++ )
 	{
-		cout << arr_[i] << " ";
+		cout << _arr_[i] << " ";
 	}
 	cout << endl;
 
@@ -88,7 +70,7 @@ bool int_arr::check_size()
 	int size;
 	bool check;
 
-	size = sizeof(arr_) + (sizeof(int) * size_);
+	size = sizeof(_arr) + (sizeof(int) * _size);
 	if (size < 5*1024) 
 		check = true;
 	else 
@@ -101,25 +83,25 @@ bool int_arr::check_size()
 void int_arr::increase_size( int inc )
 {
 
-	int_arr *temp_arr = new int_arr(size_ + inc);
-	delete [] arr_;	
-	*arr_ = *temp_arr->arr_;
-	size_ = temp_arr->size_;
+	int_arr *temp_arr = new int_arr(_size + inc);
+	delete [] _arr;	
+	*_arr = *temp_arr->_arr;
+	_size = temp_arr->_size;
 
 }
 
 void int_arr::sort_arr()
 {
 		
-	int n = size_;
+	int n = _size;
 	bool swapped;
     do
 	{
       	swapped = false;
         for ( int i = 1; i < n; i++ )
-            if ( arr_[i-1] > arr_[i] )
+            if ( _arr[i-1] > _arr[i] )
 			{
-                swap(arr_[i-1], arr_[i]);
+                swap(_arr[i-1], _arr[i]);
                 swapped = true;
 			}
         n--;

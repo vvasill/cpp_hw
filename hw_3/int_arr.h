@@ -4,12 +4,15 @@
 class int_arr
 {
 	private:
-		int *arr;
-		int arr_size;
+		int *_arr;
+		int _size;
 	public:
 		int_arr( int size );
 		int_arr();
 		~int_arr();	
+
+		int operator[] (const int) const;
+		int_arr operator+ (int_arr& arr);
 	
 		int size();
 		void init( int min, int max );	
