@@ -6,9 +6,9 @@ class int_arr
 	private:
 		int* _arr;
 		int _size;
+		int_arr();
 	public:
 		int_arr( int size );
-		int_arr();
 		~int_arr();	
 
 		int size();

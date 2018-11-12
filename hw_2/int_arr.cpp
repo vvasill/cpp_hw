@@ -38,7 +38,7 @@ void int_arr::init( int min, int max )
 
 	for( int i = 0; i < _size; i++ )
 	{
-		_arr_[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
+		_arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
 	}
 
 }
@@ -48,7 +48,7 @@ void int_arr::print_arr()
 	
 	for( int i = 0; i < _size; i++ )
 	{
-		cout << _arr_[i] << " ";
+		cout << _arr[i] << " ";
 	}
 	cout << endl;
 

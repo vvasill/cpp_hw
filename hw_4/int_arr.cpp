@@ -7,7 +7,7 @@ using namespace std;
 int_arr::int_arr( int size )
 {
  	
-	_arr = new int[size];
+	_arr = new int [size];
 	_size = size;
 
 };
@@ -28,7 +28,7 @@ int_arr::~int_arr()
 
 };
 
-/*int& int_arr::operator[] (const int i) const
+int& int_arr::operator[] (const int i) const
 {
 	if (i >= _size) 
 	{ 
@@ -36,21 +36,19 @@ int_arr::~int_arr()
 		exit(0); 
 	} 
 	return _arr[i];
-}*/
+}
 
-int_arr int_arr::operator +(const int_arr sm)
+int_arr& int_arr::operator +(const int_arr& sm)
 {
-	int_arr *result;
 	int i,j;
+	this->_size = _size + sm._size;
 
-	result->_size = this->_size + sm._size;
+	for(i = 0; i < _size; i++)
+		this->data[i] = data[i];
+	for(j = _size; j < sm._size; j++)
+		this->data[j] = sm.data[j];
 
-	for(i = 0; i < this->_size; i++)
-		result->_arr[i] = this->_arr[i];
-	for(j = this->_size; j < sm._size; j++)
-		result->_arr[j] = sm._arr[j];
-
-	return *result;
+	return *this;
 }
 
 int int_arr::size()
@@ -118,7 +116,7 @@ void int_arr::increase_size( int inc )
 void int_arr::sort_arr()
 {
 		
-	int n = _size;
+	int n = _arrsize;
 	bool swapped;
     do
 	{
