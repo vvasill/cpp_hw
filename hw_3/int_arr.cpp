@@ -28,43 +28,49 @@ int_arr::~int_arr()
 
 };
 
-/*int& int_arr::operator[] (const int i) const
+int& int_arr::operator[] (const int i) const
 {
+	int res;
+
 	if (i >= _size) 
 	{ 
 		cout << "index out of range"; 
 		exit(0); 
-	} 
-	return _arr[i];
-}*/
+	}
+	else
+		res = _arr[i];
 
-int_arr& operator+=(const int_arr& rhs)
-{
-	for(i = 0; i < rhs->_size; i++)
-		this->_arr[this->_size + i] = rhs->_arr[i];
-	this->_size += rhs->_size
-
-	return *this;
+	return res;
 }
 
-friend operator+(int_arr lhs, const int_arr& rhs)
+int_arr& operator+=(const int_arr r_arr)
 {
-	lhs += rhs;
-	return lhs;
+	for(i = 0; i < r_arr._size; i++)
+		this._arr[this._size + i] = r_arr._arr[i];
+	this._size += r_arr._size
+
+	return this;
 }
 
-int_arr int_arr::sum(int_arr* s_arr)
+int_arr operator+(const int_arr l_arr, const int_arr r_arr)
 {
-	int i,j,size;
-	size = this->_size + s_arr->_size;
-	int_arr *result = new int_arr(size);
+	int_arr res;
+	res = this.sum(s_arr);
+	return res;
+}
 
-	for(i = 0; i < this->_size; i++)
-		result->_arr[i] = this->_arr[i];
-	for(j = this->_size; j < s_arr->_size; j++)
-		result->_arr[j] = s_arr->_arr[j];
+int_arr int_arr::sum(const int_arr s_arr)
+{
+	int i, j, size;
+	size = arr._size + s_arr._size;
+	int_arr result = int_arr(size);
 
-	return *result;
+	for(i = 0; i < this._size; i++)
+		result._arr[i] = this._arr[i];
+	for(j = this._size; j < s_arr._size; j++)
+		result._arr[j] = s_arr._arr[j];
+
+	return result;
 }
 
 int int_arr::size()
@@ -72,7 +78,17 @@ int int_arr::size()
 	return(_size);
 }
 
-void int_arr::init( int min, int max )
+int int_arr::get(int i)
+{
+	return _arr[i];
+}
+
+void int_arr::set(int i, int num)
+{
+	_arr[i] = num;
+}
+
+void int_arr::init(int min, int max)
 {
 
 	for( int i = 0; i < _size; i++ )
@@ -119,7 +135,7 @@ bool int_arr::check_size()
 
 }
 
-void int_arr::increase_size( int inc )
+void int_arr::increase_size(int inc)
 {
 
 	int_arr *temp_arr = new int_arr(_size + inc);

@@ -11,18 +11,21 @@ class int_arr
 		int_arr( int size );
 		~int_arr();	
 
-		//int operator[] (const int) const;
-		int_arr& operator+= (const int_arr& arr);
-		friend int_arr& operator+ (int_arr lhs, const int_arr& rhs);
+		int_arr& operator= (const int_arr arr);
+		int& operator[] (const int) const;
+		int_arr& operator+= (const int_arr arr);
+		int_arr operator+ (const int_arr l_arr, const int_arr r_arr);
 	
-		int_arr sum(int_arr* arr);
 		int size();
-		void init( int min, int max );	
+		int get(int i);
+		void set(int i, int num);
+		void init(int min, int max);	
 		void print_arr();
 		void swap(int &a, int &b);
 		bool check_size();
-		void increase_size( int inc );
+		void increase_size(int inc);
 		void sort_arr();
+		int_arr sum(const int_arr s_arr);
 	
 };
 
