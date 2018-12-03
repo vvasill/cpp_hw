@@ -18,9 +18,9 @@ int main( int argc, char* argv[] )
 	int_arr *arr = new int_arr(size);
 
 	arr->init(min, max);
-	arr->print_arr();
-	arr->sort_arr();
-	arr->print_arr();
+	arr->print();
+	arr->sort();
+	arr->print();
 
 	arr->check_size();
 	arr->increase_size(1);

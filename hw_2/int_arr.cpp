@@ -4,28 +4,26 @@
 
 using namespace std;
 
-int_arr::int_arr( int size )
+int_arr::int_arr(int size)
 {
- 	
-	_arr = new int [size];
+	int* _arr = new int[size];
 	_size = size;
-
 };
 
 int_arr::int_arr()
 {
-
 	_arr = NULL;
 	_size = 0;
-
 };
+
+/*int_arr::int_arr(const &int_arr)
+{
+}*/
 
 int_arr::~int_arr()
 {
-
 	if ( _arr != NULL )	
 		delete [] _arr;
-
 };
 
 int int_arr::size()
@@ -33,25 +31,37 @@ int int_arr::size()
 	return(_size);
 }
 
+void int_arr::set(int num, int pos)
+{
+	if (pos >= _size)
+	{
+		cout << "index out of range" << endl;
+		return;
+	}
+	else
+		*(_arr + pos) = num;
+}
+
+int int_arr::get(int pos)
+{
+	return *(_arr + pos);
+}
+
 void int_arr::init( int min, int max )
 {
-
 	for( int i = 0; i < _size; i++ )
 	{
 		_arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
 	}
-
 }
 
-void int_arr::print_arr()
+void int_arr::print()
 {
-	
 	for( int i = 0; i < _size; i++ )
 	{
 		cout << _arr[i] << " ";
 	}
 	cout << endl;
-
 }
 
 void int_arr::swap(int &a, int &b)
