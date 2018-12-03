@@ -16,9 +16,9 @@ int_arr::int_arr()
 	_size = 0;
 };
 
-/*int_arr::int_arr(const &int_arr)
+int_arr::int_arr(const int_arr &)
 {
-}*/
+}
 
 int_arr::~int_arr()
 {
@@ -26,28 +26,89 @@ int_arr::~int_arr()
 		delete [] _arr;
 };
 
+int int_arr::operator[] (const int i) const
+{
+	if (i >= _size) 
+	{ 
+		cout << "index out of range"; 
+		exit(0); 
+	}
+	else
+		return _arr[i];
+}
+
+int_arr& int_arr::operator+=(const int_arr r_arr)
+{
+	int i;
+
+	for(i = 0; i < _size; i++)
+		this->_arr[i] = this->_arr[i] + r_arr[i];
+
+	return *this;
+}
+
+int_arr int_arr::operator+(const int_arr r_arr)
+{
+	return sum(r_arr);
+}
+
+int_arr operator+(const int_arr l_arr, const int_arr r_arr)
+{
+}
+
+int_arr int_arr::sum(const int_arr r_arr)
+{
+	int i;
+	int_arr result = int_arr(_size);
+
+	for(i = 0; i < _size; i++)
+		result._arr[i] = _arr[i] + r_arr[i];
+
+	return result;
+}
+
+int_arr int_arr::concat(const int_arr r_arr)
+{
+	int i, j, size;
+	size = _size + r_arr._size;
+	int_arr result = int_arr(size);
+
+	for(i = 0; i < _size; i++)
+		result._arr[i] = _arr[i];
+	for(j = _size; j < r_arr._size; j++)
+		result._arr[j] = r_arr._arr[j];
+
+	return result;
+}
+
 int int_arr::size()
 {
 	return(_size);
 }
 
-void int_arr::set(int num, int pos)
+void int_arr::set(int i, int num)
 {
-	if (pos >= _size)
+	if (i >= _size)
 	{
 		cout << "index out of range" << endl;
-		return;
+		exit(0); 
 	}
 	else
-		*(_arr + pos) = num;
+		_arr[i] = num;
 }
 
-int int_arr::get(int pos)
+int int_arr::get(int i)
 {
-	return *(_arr + pos);
+	if (i >= _size)
+	{
+		cout << "index out of range" << endl;
+		exit(0); 
+	}
+	else
+		return(_arr[i]);
 }
 
-void int_arr::init( int min, int max )
+void int_arr::init(int min, int max)
 {
 	for( int i = 0; i < _size; i++ )
 	{
@@ -66,17 +127,14 @@ void int_arr::print()
 
 void int_arr::swap(int &a, int &b)
 {
-
 	int temp;	
 	temp = a;
 	a = b;
 	b = temp;
-
 }
 
 bool int_arr::check_size()
 {
-
 	int size;
 	bool check;
 
@@ -87,22 +145,18 @@ bool int_arr::check_size()
 		check = false;
 
 	return(check);
-
 }
 
-void int_arr::increase_size( int inc )
+void int_arr::increase_size(int inc)
 {
-
 	int_arr *temp_arr = new int_arr(_size + inc);
 	delete [] _arr;	
 	*_arr = *temp_arr->_arr;
 	_size = temp_arr->_size;
-
 }
 
-void int_arr::sort_arr()
+void int_arr::sort()
 {
-		
 	int n = _size;
 	bool swapped;
     do
@@ -116,5 +170,4 @@ void int_arr::sort_arr()
 			}
         n--;
     } while ( swapped  == true );
-
 }

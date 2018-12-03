@@ -9,23 +9,26 @@ class int_arr
 		int_arr();
 	public:
 		int_arr(int);
-		//int_arr(const &int_arr);
+		int_arr(const int_arr &);
 		~int_arr();	
 
 		int size();
 		void set(int, int);
-		int get(int pos);
+		int get(int);
 		void init(int, int);	
 		void print();
 		void swap(int&, int&);
 		bool check_size();
 		void increase_size(int);
-		void sort_arr();
+		void sort();
+		int_arr sum(const int_arr);
+		int_arr concat(const int_arr);
 
-		int_arr& operator= (const int_arr arr);
-		int& operator[] (const int) const;
-		int_arr& operator+= (const int_arr arr);
-		int_arr operator+ (const int_arr l_arr, const int_arr r_arr)	
+		int_arr& operator= (const int_arr);
+		int operator[] (const int) const;
+		int_arr& operator+= (const int_arr);
+		int_arr operator+ (const int_arr);
+		friend int_arr operator+ (const int_arr, const int_arr);	
 };
 
 #endif // INT_ARR_H
