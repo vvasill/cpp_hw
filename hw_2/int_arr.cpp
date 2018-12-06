@@ -4,9 +4,11 @@
 
 using namespace std;
 
+//constructors
+
 int_arr::int_arr(int size)
 {
-	int* _arr = new int[size];
+	_arr = new int[size];
 	_size = size;
 };
 
@@ -16,70 +18,140 @@ int_arr::int_arr()
 	_size = 0;
 };
 
-int_arr::int_arr(const int_arr &)
+int_arr::int_arr(const int_arr& arr)
 {
+	_size = arr._size;
+	for(int i = 0; i < _size; i++)
+		_arr[i] = arr[i];
 }
 
 int_arr::~int_arr()
 {
 	if ( _arr != NULL )	
 		delete [] _arr;
-};
+}
+
+//operators
+
+int_arr int_arr::operator= (const int_arr r_arr)
+{
+	for(int i = 0; i < _size; i++)
+		this->_arr[i] = r_arr._arr[i];
+
+	return *this;
+}
 
 int int_arr::operator[] (const int i) const
 {
 	if (i >= _size) 
 	{ 
-		cout << "index out of range"; 
+		cout << "index out of range" << endl; 
 		exit(0); 
 	}
 	else
 		return _arr[i];
 }
 
-int_arr& int_arr::operator+=(const int_arr r_arr)
+int_arr int_arr::operator+= (const int_arr r_arr)
 {
-	int i;
+	if (r_arr._size != _size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		for(int i = 0; i < _size; i++)
+		this->_arr[i] += + r_arr[i];
 
-	for(i = 0; i < _size; i++)
-		this->_arr[i] = this->_arr[i] + r_arr[i];
-
-	return *this;
+		return *this;
+	}
 }
 
-int_arr int_arr::operator+(const int_arr r_arr)
+int_arr& int_arr::operator-= (const int_arr r_arr)
 {
-	return sum(r_arr);
+	if (r_arr._size != _size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		for(int i = 0; i < _size; i++)
+			this->_arr[i] = this->_arr[i] - r_arr[i];
+
+		return *this;
+	}
+}
+
+int_arr int_arr::operator+ (const int_arr r_arr)
+{
+	if (r_arr._size != _size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		int_arr result = int_arr(_size);
+
+		for(int i = 0; i < _size; i++)
+			result._arr[i] = _arr[i] + r_arr[i];
+
+		return result;
+	}
+}
+
+int_arr int_arr::operator-(const int_arr r_arr)
+{
+	if (r_arr._size != _size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		int_arr result = int_arr(_size);
+
+		for(int i = 0; i < _size; i++)
+			result._arr[i] = _arr[i] - r_arr[i];
+
+		return result;
+	}
 }
 
 int_arr operator+(const int_arr l_arr, const int_arr r_arr)
 {
+	if (r_arr._size != l_arr._size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		int_arr result = int_arr(l_arr._size);
+
+		for(int i = 0; i < l_arr._size; i++)
+			result._arr[i] = l_arr[i] + r_arr[i];
+
+		return result;
+	}
 }
 
-int_arr int_arr::sum(const int_arr r_arr)
+int_arr int_arr::operator& (const int_arr r_arr)
 {
-	int i;
-	int_arr result = int_arr(_size);
-
-	for(i = 0; i < _size; i++)
-		result._arr[i] = _arr[i] + r_arr[i];
-
-	return result;
-}
-
-int_arr int_arr::concat(const int_arr r_arr)
-{
-	int i, j, size;
-	size = _size + r_arr._size;
+	int size = _size + r_arr._size;
 	int_arr result = int_arr(size);
 
-	for(i = 0; i < _size; i++)
+	for(int i = 0; i < _size; i++)
 		result._arr[i] = _arr[i];
-	for(j = _size; j < r_arr._size; j++)
+	for(int j = _size; j < size; j++)
 		result._arr[j] = r_arr._arr[j];
 
 	return result;
 }
+
+//functions
 
 int int_arr::size()
 {
@@ -110,7 +182,7 @@ int int_arr::get(int i)
 
 void int_arr::init(int min, int max)
 {
-	for( int i = 0; i < _size; i++ )
+	for(int i = 0; i < _size; i++)
 	{
 		_arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
 	}
@@ -118,7 +190,7 @@ void int_arr::init(int min, int max)
 
 void int_arr::print()
 {
-	for( int i = 0; i < _size; i++ )
+	for(int i = 0; i < _size; i++)
 	{
 		cout << _arr[i] << " ";
 	}

@@ -21,14 +21,15 @@ class int_arr
 		bool check_size();
 		void increase_size(int);
 		void sort();
-		int_arr sum(const int_arr);
-		int_arr concat(const int_arr);
 
-		int_arr& operator= (const int_arr);
+		int_arr operator= (const int_arr);
 		int operator[] (const int) const;
-		int_arr& operator+= (const int_arr);
+		int_arr operator+= (const int_arr);
+		int_arr& operator-= (const int_arr);
 		int_arr operator+ (const int_arr);
+		int_arr operator- (const int_arr);
 		friend int_arr operator+ (const int_arr, const int_arr);	
+		int_arr operator& (const int_arr);
 };
 
 #endif // INT_ARR_H
