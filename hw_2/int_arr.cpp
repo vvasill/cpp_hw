@@ -33,12 +33,11 @@ int_arr::~int_arr()
 
 //operators
 
-int_arr int_arr::operator= (const int_arr r_arr)
+void int_arr::operator= (const int_arr r_arr)
 {
-	for(int i = 0; i < _size; i++)
-		this->_arr[i] = r_arr._arr[i];
-
-	return *this;
+	_size = r_arr._size;
+	//for(int i = 0; i < _size; i++)
+		//_arr[i] = r_arr._arr[i];
 }
 
 int int_arr::operator[] (const int i) const

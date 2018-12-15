@@ -15,14 +15,16 @@ int main( int argc, char* argv[] )
 	cin >> max;
 
 	int_arr arr(size);
-	int_arr arr2(2*size);
+	int_arr arr2(arr);
 
 	arr.init(min, max);
 	arr2.init(min, max);
 	arr.print();
 	arr2.print();
 
-	arr = arr2;
+	arr.set(1, 100);
+	arr.print();
+	//arr = arr2;
 	//arr.print();	
 
 	/*arr.check_size();
