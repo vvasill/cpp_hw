@@ -29,7 +29,7 @@ class int_arr
 		friend int_arr operator+ (const int_arr, const int_arr);
 		int_arr operator- (const int_arr&);
 		int_arr operator* (const int_arr&);	
-		int_arr operator& (const int_arr);
+		int_arr operator& (const int_arr&);
 };
 
 #endif // INT_ARR_H

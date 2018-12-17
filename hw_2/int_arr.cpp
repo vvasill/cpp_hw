@@ -144,7 +144,7 @@ int_arr int_arr::operator*(const int_arr& that)
 	}
 }
 
-int_arr int_arr::operator& (const int_arr that)
+int_arr int_arr::operator& (const int_arr& that)
 {
 	int size = _size + that._size;
 	int_arr result = int_arr(size);
