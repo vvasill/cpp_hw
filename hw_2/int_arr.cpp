@@ -10,34 +10,42 @@ int_arr::int_arr(int size)
 {
 	_arr = new int[size];
 	_size = size;
-};
+}
 
 int_arr::int_arr()
 {
 	_arr = NULL;
 	_size = 0;
-};
+}
 
-int_arr::int_arr(const int_arr& arr)
+int_arr::int_arr(const int_arr& that)
 {
-	_size = arr._size;
+	_size = that._size;
+	_arr = new int[_size];
 	for(int i = 0; i < _size; i++)
-		_arr[i] = arr[i];
+		_arr[i] = that._arr[i];
 }
 
 int_arr::~int_arr()
 {
 	if ( _arr != NULL )	
-		delete [] _arr;
+		delete[] _arr;
 }
 
+//----------------------------------------------------------------------------------------------
 //operators
 
-void int_arr::operator= (const int_arr r_arr)
+int_arr& int_arr::operator= (const int_arr& that)
 {
-	_size = r_arr._size;
-	//for(int i = 0; i < _size; i++)
-		//_arr[i] = r_arr._arr[i];
+	if (this != &that)
+	{	
+		delete[] _arr;
+		_size = that._size;
+		_arr = new int[_size];
+		for(int i = 0; i < _size; i++)
+			_arr[i] = that._arr[i];
+	}
+	return *this;
 }
 
 int int_arr::operator[] (const int i) const
@@ -51,9 +59,9 @@ int int_arr::operator[] (const int i) const
 		return _arr[i];
 }
 
-int_arr int_arr::operator+= (const int_arr r_arr)
+int_arr& int_arr::operator+= (const int_arr& that)
 {
-	if (r_arr._size != _size) 
+	if (that._size != _size) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
@@ -61,15 +69,14 @@ int_arr int_arr::operator+= (const int_arr r_arr)
 	else
 	{
 		for(int i = 0; i < _size; i++)
-		this->_arr[i] += + r_arr[i];
-
+			this->_arr[i] += that._arr[i];
 		return *this;
-	}
+	}	
 }
 
-int_arr& int_arr::operator-= (const int_arr r_arr)
+int_arr& int_arr::operator-= (const int_arr& that)
 {
-	if (r_arr._size != _size) 
+	if (that._size != _size) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
@@ -77,15 +84,33 @@ int_arr& int_arr::operator-= (const int_arr r_arr)
 	else
 	{
 		for(int i = 0; i < _size; i++)
-			this->_arr[i] = this->_arr[i] - r_arr[i];
-
+			this->_arr[i] -= that._arr[i];
 		return *this;
+	}	
+}
+
+int_arr operator+(const int_arr first_that, const int_arr second_that)
+{
+	if (first_that._size != second_that._size) 
+	{ 
+		cout << "operation is forbidden" << endl; 
+		exit(0); 
+	}
+	else
+	{
+		int size = first_that._size + second_that._size;
+		int_arr result = int_arr(size);
+
+		for(int i = 0; i < size; i++)
+			result._arr[i] = first_that[i] + second_that[i];
+
+		return result;
 	}
 }
 
-int_arr int_arr::operator+ (const int_arr r_arr)
+int_arr int_arr::operator-(const int_arr& that)
 {
-	if (r_arr._size != _size) 
+	if (that._size != _size) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
@@ -95,15 +120,15 @@ int_arr int_arr::operator+ (const int_arr r_arr)
 		int_arr result = int_arr(_size);
 
 		for(int i = 0; i < _size; i++)
-			result._arr[i] = _arr[i] + r_arr[i];
+			result._arr[i] = _arr[i] - that._arr[i];
 
 		return result;
 	}
 }
 
-int_arr int_arr::operator-(const int_arr r_arr)
+int_arr int_arr::operator*(const int_arr& that)
 {
-	if (r_arr._size != _size) 
+	if (that._size != _size) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
@@ -113,43 +138,30 @@ int_arr int_arr::operator-(const int_arr r_arr)
 		int_arr result = int_arr(_size);
 
 		for(int i = 0; i < _size; i++)
-			result._arr[i] = _arr[i] - r_arr[i];
+			result._arr[i] = _arr[i] * that._arr[i];
 
 		return result;
 	}
 }
 
-int_arr operator+(const int_arr l_arr, const int_arr r_arr)
+int_arr int_arr::operator& (const int_arr that)
 {
-	if (r_arr._size != l_arr._size) 
-	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
-	{
-		int_arr result = int_arr(l_arr._size);
-
-		for(int i = 0; i < l_arr._size; i++)
-			result._arr[i] = l_arr[i] + r_arr[i];
-
-		return result;
-	}
-}
-
-int_arr int_arr::operator& (const int_arr r_arr)
-{
-	int size = _size + r_arr._size;
+	int size = _size + that._size;
 	int_arr result = int_arr(size);
 
 	for(int i = 0; i < _size; i++)
+	{
 		result._arr[i] = _arr[i];
+	}
 	for(int j = _size; j < size; j++)
-		result._arr[j] = r_arr._arr[j];
+	{
+		result._arr[j] = that._arr[j-(_size)];
+	}
 
 	return result;
 }
 
+//--------------------------------------------------------------------------------------
 //functions
 
 int int_arr::size()

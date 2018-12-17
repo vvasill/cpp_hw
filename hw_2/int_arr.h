@@ -22,13 +22,13 @@ class int_arr
 		void increase_size(int);
 		void sort();
 
-		void operator= (const int_arr);
+		int_arr& operator= (const int_arr&);
 		int operator[] (const int) const;
-		int_arr operator+= (const int_arr);
-		int_arr& operator-= (const int_arr);
-		int_arr operator+ (const int_arr);
-		int_arr operator- (const int_arr);
-		friend int_arr operator+ (const int_arr, const int_arr);	
+		int_arr& operator+= (const int_arr&);
+		int_arr& operator-= (const int_arr&);
+		friend int_arr operator+ (const int_arr, const int_arr);
+		int_arr operator- (const int_arr&);
+		int_arr operator* (const int_arr&);	
 		int_arr operator& (const int_arr);
 };
 

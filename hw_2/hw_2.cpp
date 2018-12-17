@@ -4,18 +4,21 @@
 
 using namespace std;
 
-int main( int argc, char* argv[] )
+int main( int argc, char* argv[] )	
 {
 		
 	srand(time(0));
 	int size, min, max;
 	
-	cin >> size;
-	cin >> min;
-	cin >> max;
+	//cin >> size;
+	//cin >> min;
+	//cin >> max;
+	size = 10;
+	min = 1;
+	max = 5;
 
 	int_arr arr(size);
-	int_arr arr2(arr);
+	int_arr arr2(size);
 
 	arr.init(min, max);
 	arr2.init(min, max);
@@ -24,13 +27,26 @@ int main( int argc, char* argv[] )
 
 	arr.set(1, 100);
 	arr.print();
-	//arr = arr2;
-	//arr.print();	
 
-	/*arr.check_size();
-	arr.increase_size(1);
-	arr.check_size();*/
+	arr = arr2;
+	arr.print();
+
+	arr2.init(min, max);
+	arr2.print();
+
+	arr += arr2;
+	arr.print();
+
+	arr = arr - arr2;
+	arr.print();
+
+	(arr&arr2).print();
 	
+	cout << arr[5] << endl;
+
+	arr.sort();
+	arr.print ();
+
 	return 0;	
 	
 }
