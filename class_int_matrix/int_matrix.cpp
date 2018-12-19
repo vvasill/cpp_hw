@@ -8,7 +8,7 @@ using namespace std;
 
 int_matrix::int_matrix() : int_arr()
 {
-	_colnum = 0;
+	_col = 0;
 }
 
 int_matrix::int_matrix(int size, int n) : int_arr(size) 
@@ -20,18 +20,18 @@ int_matrix::int_matrix(int size, int n) : int_arr(size)
 	}
 	else
 	{
-		_colnum = n;
+		_col = n;
 	}
 }
 
 int_matrix::int_matrix(const int_matrix& that) : int_arr(that)
 {
-    _colnum = that._colnum;
+    _col = that._col;
 }
 
 int_matrix::int_matrix(const int_arr& that) : int_arr(that)
 {
-    _colnum = 0;
+    _col = 0;
 }
 
 int_matrix::~int_matrix()
@@ -43,106 +43,141 @@ int_matrix::~int_matrix()
 
 int_matrix& int_matrix::operator= (const int_matrix& that)
 {
-	_colnum = that._colnum;
+	int_arr::operator= (that);
+	_col = that.col();
 	return *this;
 }
 
 int_matrix& int_matrix::operator= (const int_arr& that)
 {
-	_colnum = 0;
+	int_arr::operator= (that);
+	_col = 0;
 	return *this;
 }
 
-int int_matrix::operator() (const int i, const int j)
+int int_matrix::operator() (const int i, const int j) const
 {
-	get(j + i*_colnum);
+	get(j + i*col());
 }
 
 int_matrix& int_matrix::operator+= (const int_matrix& that)
 {
 	int_arr::operator+= (that);
-	_colnum = 0;
+	_col = 0;
 	return *this;
 }
 
 int_matrix& int_matrix::operator-= (const int_matrix& that)
 {
 	int_arr::operator-= (that);
-	_colnum = 0;
+	_col = 0;
 	return *this;
 }
 
-int_matrix int_matrix::operator+ (const int_matrix& that)
+int_matrix int_matrix::operator+ (const int_matrix& that) const
 {
 	int_matrix result = int_matrix();
-	result = int_arr::operator+ (that);
-	result._colnum = col();
+	result = operator+ (that);
+	result._col = col();
 	return result;
 }
 
-int_matrix int_matrix::operator- (const int_matrix& that)
+int_matrix int_matrix::operator- (const int_matrix& that) const
 {
 	int_matrix result = int_matrix();
 	result = int_arr::operator- (that);
-	result._colnum = col();
+	result._col = col();
 	return result;
 }
 
-int_matrix int_matrix::operator* (const int_matrix& that)
+int_matrix int_matrix::operator* (const int_matrix& that) const
 {
-	if	(size%n != 0)
+	if	(col() != that.raw())
 	{
 		cout << "operation is forbidden" << endl;
 		exit(0);	
 	}
 	else
 	{
+		int_matrix result(raw()*that.col(), that.col());
 		int temp;
+		int_arr vec1;
+		int_arr vec2;
+
 		for(int i = 0; i < raw(); i++)
 		{
-			for(int j = 0; j < col(); j++)
+			vec1 = vec_from_raw(i);
+			for(int j = 0; j < that.col(); j++)
 			{
-				temp = this->(i,j)*that.(i,j) + this->(i,j)*that.(i,j);
-				matrix_set(i,j,temp);
+				vec2 = that.vec_from_col(j);
+				temp = vec1*vec2;
+				result.set_el(i, j, temp);
 			}
 		}
+
+		return result;
 	}
 }	
 		
-int_matrix int_matrix::operator& (const int_matrix& that)
+int_matrix int_matrix::operator& (const int_matrix& that) const
 {
 	int_arr::operator& (that);
 }
 
 //----------------------------------------------------------------------------------------------
 //functions
-int int_matrix::col()
+int int_matrix::col() const
 {
-	return _colnum;
+	return _col;
 }
 
-int int_matrix::raw()
+int int_matrix::raw() const
 {
-	int rawnum = int(size()/col());
-	return rawnum;
+	int raw = int(size()/col());
+	return raw;
 }
 
-int int_matrix::matrix_get(int i, int j)
+int int_matrix::get_el(int i, int j) const
 {
 	get(j + i*col());
 }
 
-void int_matrix::matrix_set(int i, int j, int num)
+int_arr int_matrix::vec_from_col(int n) const
+{
+	int_arr result = int_arr(raw());
+	for(int i = 0; i < result.size(); i++)
+		result.set(i, get_el(i, n));
+	return result;
+}
+
+int_arr int_matrix::vec_from_raw(int n) const
+{
+	int_arr result = int_arr(col());
+	for(int j = 0; j < result.size(); j++)
+		result.set(j, get_el(n, j));
+	return result;
+}
+
+void int_matrix::set_el(int i, int j, int num)
 {
 	set(j + i*col(), num);
 }
 
-void int_matrix::print_matrix()
+void int_matrix::print_matrix() const
 {
 	for(int i = 0; i < raw(); i++)
 	{
 		for(int j = 0; j < col(); j++)
-			cout << matrix_get(i, j) << " ";
+			cout << get_el(i, j) << " ";
 		cout << endl;
 	}
+}
+
+int_matrix int_matrix::tr() const
+{
+	int_matrix result = int_matrix(size(), raw());
+	for(int i = 0; i < raw(); i++)
+		for(int j = 0; j < col(); j++)
+			result.set_el(j, i, get_el(i,j));
+	return result;
 }

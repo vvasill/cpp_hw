@@ -20,20 +20,20 @@ int main( int argc, char* argv[] )
 
 	int_matrix matrix(size, n);
 	int_matrix matrix2(size, n);
+	int_matrix matrix3(size, n);
 
 	matrix.init(min, max);
-	matrix2.init(min, max);
-	matrix.print();
-	matrix2.print();
-	
-	cout << matrix.col();
-	cout << matrix.raw();
-
-	/*matrix = matrix2;
 	matrix.print_matrix();
+	cout << endl;
+
+	matrix.tr().print_matrix();
+	matrix2.init(min, max);
+	matrix2.print_matrix();
+	cout << endl;
 	
-	matrix.matrix_set(1,1,0);
-	matrix.print_matrix();*/
+	(matrix.tr()*matrix2).print_matrix();
+	cout << endl;
+	(matrix*matrix2.tr()).print_matrix();
 
 	return 0;	
 }

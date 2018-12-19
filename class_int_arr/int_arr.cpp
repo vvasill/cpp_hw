@@ -89,7 +89,7 @@ int_arr& int_arr::operator-= (const int_arr& that)
 	}	
 }
 
-int_arr operator+(const int_arr first_that, const int_arr second_that)
+int_arr operator+(const int_arr& first_that, const int_arr& second_that)
 {
 	if (first_that._size != second_that._size) 
 	{ 
@@ -108,7 +108,7 @@ int_arr operator+(const int_arr first_that, const int_arr second_that)
 	}
 }
 
-int_arr int_arr::operator-(const int_arr& that)
+int_arr int_arr::operator-(const int_arr& that) const
 {
 	if (that._size != _size) 
 	{ 
@@ -126,9 +126,9 @@ int_arr int_arr::operator-(const int_arr& that)
 	}
 }
 
-int int_arr::operator*(const int_arr& that)
+int int_arr::operator*(const int_arr& that) const
 {
-	if (that.size() != size()) 
+	if (size() != that.size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
@@ -144,7 +144,7 @@ int int_arr::operator*(const int_arr& that)
 	}
 }
 
-int_arr int_arr::operator& (const int_arr& that)
+int_arr int_arr::operator& (const int_arr& that) const
 {
 	int size = _size + that._size;
 	int_arr result = int_arr(size);
