@@ -14,6 +14,8 @@ class int_matrix : public int_arr
 		int_matrix(const int_arr &);
 		~int_matrix();	
 		
+		int col();
+		int raw();
 		int matrix_get(int, int);
 		void matrix_set(int, int, int);
 		void print_matrix();

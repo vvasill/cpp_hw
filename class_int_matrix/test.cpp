@@ -25,12 +25,15 @@ int main( int argc, char* argv[] )
 	matrix2.init(min, max);
 	matrix.print();
 	matrix2.print();
+	
+	cout << matrix.col();
+	cout << matrix.raw();
 
-	matrix = matrix2;
+	/*matrix = matrix2;
 	matrix.print_matrix();
 	
 	matrix.matrix_set(1,1,0);
-	matrix.print_matrix();
+	matrix.print_matrix();*/
 
 	return 0;	
 }
