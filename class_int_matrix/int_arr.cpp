@@ -126,17 +126,17 @@ int_arr int_arr::operator-(const int_arr& that)
 
 int_arr int_arr::operator*(const int_arr& that)
 {
-	if (that._size != _size) 
+	if (that.size() != size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		int_arr result = int_arr(_size);
+		int_arr result = int_arr(size());
 
-		for(int i = 0; i < _size; i++)
-			result._arr[i] = _arr[i] * that._arr[i];
+		for(int i = 0; i < size(); i++)
+			result[i] = this->[i] * that.[i];
 
 		return result;
 	}

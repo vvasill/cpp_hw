@@ -45,7 +45,9 @@ int main( int argc, char* argv[] )
 	cout << arr[5] << endl;
 
 	arr.sort();
-	arr.print ();
+	arr.print();
+
+	cout << arr*arr2 << endl;
 
 	return 0;	
 	

@@ -126,19 +126,19 @@ int_arr int_arr::operator-(const int_arr& that)
 	}
 }
 
-int_arr int_arr::operator*(const int_arr& that)
+int int_arr::operator*(const int_arr& that)
 {
-	if (that._size != _size) 
+	if (that.size() != size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		int_arr result = int_arr(_size);
+		int result = 0;
 
-		for(int i = 0; i < _size; i++)
-			result._arr[i] = _arr[i] * that._arr[i];
+		for(int i = 0; i < size(); i++)
+			result += get(i) * that[i];
 
 		return result;
 	}
@@ -164,7 +164,7 @@ int_arr int_arr::operator& (const int_arr& that)
 //--------------------------------------------------------------------------------------
 //functions
 
-int int_arr::size()
+int int_arr::size() const
 {
 	return(_size);
 }
@@ -180,7 +180,7 @@ void int_arr::set(int i, int num)
 		_arr[i] = num;
 }
 
-int int_arr::get(int i)
+int int_arr::get(int i) const
 {
 	if (i >= _size)
 	{
@@ -199,7 +199,7 @@ void int_arr::init(int min, int max)
 	}
 }
 
-void int_arr::print()
+void int_arr::print() const
 {
 	for(int i = 0; i < _size; i++)
 	{
@@ -216,7 +216,7 @@ void int_arr::swap(int &a, int &b)
 	b = temp;
 }
 
-bool int_arr::check_size()
+bool int_arr::check_size() const
 {
 	int size;
 	bool check;

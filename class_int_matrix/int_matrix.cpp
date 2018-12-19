@@ -13,14 +13,14 @@ int_matrix::int_matrix() : int_arr()
 
 int_matrix::int_matrix(int size, int n) : int_arr(size) 
 {
-	if	(size%n == 0)
+	if	(size%n != 0)
 	{
-		_colnum = n;	
+		cout << "operation is forbidden" << endl;
+		exit(0);	
 	}
 	else
 	{
-		cout << "operation is forbidden" << endl;
-		exit(0);
+		_colnum = n;
 	}
 }
 
@@ -76,7 +76,7 @@ int_matrix int_matrix::operator+ (const int_matrix& that)
 {
 	int_matrix result = int_matrix();
 	result = int_arr::operator+ (that);
-	result._colnum = this->_colnum;
+	result._colnum = col();
 	return result;
 }
 
@@ -84,18 +84,29 @@ int_matrix int_matrix::operator- (const int_matrix& that)
 {
 	int_matrix result = int_matrix();
 	result = int_arr::operator- (that);
-	result._colnum = this->_colnum;
+	result._colnum = col();
 	return result;
 }
 
 int_matrix int_matrix::operator* (const int_matrix& that)
 {
-	/*for(int i = 0; i < ; i++)
+	if	(size%n != 0)
 	{
-		for(int j = 0; j < _colnum; j++)
-			cout << matrix_get(i, j) << " ";
-		cout << endl;
-	}*/
+		cout << "operation is forbidden" << endl;
+		exit(0);	
+	}
+	else
+	{
+		int temp;
+		for(int i = 0; i < raw(); i++)
+		{
+			for(int j = 0; j < col(); j++)
+			{
+				temp = this->(i,j)*that.(i,j) + this->(i,j)*that.(i,j);
+				matrix_set(i,j,temp);
+			}
+		}
+	}
 }	
 		
 int_matrix int_matrix::operator& (const int_matrix& that)

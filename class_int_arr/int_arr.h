@@ -12,13 +12,13 @@ class int_arr
 		int_arr(const int_arr &);
 		~int_arr();	
 
-		int size();
+		int size() const;
 		void set(int, int);
-		int get(int);
+		int get(int) const;
 		void init(int, int);	
-		void print();
+		void print() const;
 		void swap(int&, int&);
-		bool check_size();
+		bool check_size() const;
 		void increase_size(int);
 		void sort();
 
@@ -28,7 +28,7 @@ class int_arr
 		int_arr& operator-= (const int_arr&);
 		friend int_arr operator+ (const int_arr, const int_arr);
 		int_arr operator- (const int_arr&);
-		int_arr operator* (const int_arr&);	
+		int operator* (const int_arr&);	
 		int_arr operator& (const int_arr&);
 };
 
