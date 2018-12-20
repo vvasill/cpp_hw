@@ -37,13 +37,3 @@ double_matrix::double_matrix(int n, int m)
 double_matrix::~double_matrix()
 {
 }
-
-double_vec::double_vec(int n)
-{
-	_arr = new double[n];
-	_len = n;
-}
-
-double_vec::~double_vec()
-{
-}

@@ -18,7 +18,7 @@ class int_arr
 		void init(int, int);	
 		void print() const;
 		void swap(int&, int&);
-		bool check_size() const;
+		bool check_size(int) const;
 		void increase_size(int);
 		void sort();
 

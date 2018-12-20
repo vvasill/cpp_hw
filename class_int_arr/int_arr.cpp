@@ -40,69 +40,69 @@ int_arr& int_arr::operator= (const int_arr& that)
 	if (this != &that)
 	{	
 		delete[] _arr;
-		_size = that._size;
-		_arr = new int[_size];
-		for(int i = 0; i < _size; i++)
-			_arr[i] = that._arr[i];
+		_size = that.size();
+		_arr = new int[that.size()];
+		for(int i = 0; i < that.size(); i++)
+			_arr[i] = that[i];
 	}
 	return *this;
 }
 
 int int_arr::operator[] (const int i) const
 {
-	if (i >= _size) 
+	if (i >= size()) 
 	{ 
 		cout << "index out of range" << endl; 
 		exit(0); 
 	}
 	else
-		return _arr[i];
+		return get(i);
 }
 
 int_arr& int_arr::operator+= (const int_arr& that)
 {
-	if (that._size != _size) 
+	if (size() != that.size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		for(int i = 0; i < _size; i++)
-			this->_arr[i] += that._arr[i];
+		for(int i = 0; i < size(); i++)
+			set(i, get(i) + that[i]);
 		return *this;
 	}	
 }
 
 int_arr& int_arr::operator-= (const int_arr& that)
 {
-	if (that._size != _size) 
+	if (size() != that.size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		for(int i = 0; i < _size; i++)
-			this->_arr[i] -= that._arr[i];
+		for(int i = 0; i < size(); i++)
+			set(i, get(i) - that[i]);
 		return *this;
 	}	
 }
 
 int_arr operator+(const int_arr& first_that, const int_arr& second_that)
 {
-	if (first_that._size != second_that._size) 
+	if (first_that.size() != second_that.size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		int size = first_that._size + second_that._size;
-		int_arr result = int_arr(size);
+		int res_size = first_that.size() + second_that.size();
+		int_arr result = int_arr(res_size);
 
-		for(int i = 0; i < size; i++)
-			result._arr[i] = first_that[i] + second_that[i];
+		for(int i = 0; i < res_size; i++)
+			result.set(i, first_that[i] + second_that[i]);
 
 		return result;
 	}
@@ -110,17 +110,17 @@ int_arr operator+(const int_arr& first_that, const int_arr& second_that)
 
 int_arr int_arr::operator-(const int_arr& that) const
 {
-	if (that._size != _size) 
+	if (size() != that.size()) 
 	{ 
 		cout << "operation is forbidden" << endl; 
 		exit(0); 
 	}
 	else
 	{
-		int_arr result = int_arr(_size);
+		int_arr result = int_arr(size());
 
-		for(int i = 0; i < _size; i++)
-			result._arr[i] = _arr[i] - that._arr[i];
+		for(int i = 0; i < size(); i++)
+			result.set(i, get(i) - that[i]);
 
 		return result;
 	}
@@ -146,17 +146,13 @@ int int_arr::operator*(const int_arr& that) const
 
 int_arr int_arr::operator& (const int_arr& that) const
 {
-	int size = _size + that._size;
-	int_arr result = int_arr(size);
+	int res_size = size() + that.size();
+	int_arr result = int_arr(res_size);
 
-	for(int i = 0; i < _size; i++)
-	{
-		result._arr[i] = _arr[i];
-	}
-	for(int j = _size; j < size; j++)
-	{
-		result._arr[j] = that._arr[j-(_size)];
-	}
+	for(int i = 0; i < size(); i++)
+		result.set(i, get(i));
+	for(int j = size(); j < res_size; j++)
+		result.set(j, that[j - size()]);
 
 	return result;
 }
@@ -193,9 +189,9 @@ int int_arr::get(int i) const
 
 void int_arr::init(int min, int max)
 {
-	for(int i = 0; i < _size; i++)
+	for(int i = 0; i < size(); i++)
 	{
-		_arr[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
+		set(i, int( ( float(rand())/RAND_MAX * max ) ) + min);
 	}
 }
 
@@ -216,13 +212,13 @@ void int_arr::swap(int &a, int &b)
 	b = temp;
 }
 
-bool int_arr::check_size() const
+bool int_arr::check_size(int limit) const
 {
 	int size;
 	bool check;
 
 	size = sizeof(_arr) + (sizeof(int) * _size);
-	if (size < 5*1024) 
+	if (size < limit*1024) 
 		check = true;
 	else 
 		check = false;
@@ -232,25 +228,25 @@ bool int_arr::check_size() const
 
 void int_arr::increase_size(int inc)
 {
-	int_arr *temp_arr = new int_arr(_size + inc);
-	delete [] _arr;	
-	*_arr = *temp_arr->_arr;
-	_size = temp_arr->_size;
+	int new_size = size() + inc;
+	_size = new_size;
+	for (int i = 1; i < new_size; i++)
+		set(i, 0);
 }
 
 void int_arr::sort()
 {
-	int n = _size;
+	int n = size();
 	bool swapped;
     do
 	{
       	swapped = false;
-        for ( int i = 1; i < n; i++ )
-            if ( _arr[i-1] > _arr[i] )
+        for (int i = 1; i < n; i++)
+            if (get(i-1) > get(i))
 			{
                 swap(_arr[i-1], _arr[i]);
                 swapped = true;
 			}
         n--;
-    } while ( swapped  == true );
+    } while (swapped  == true);
 }

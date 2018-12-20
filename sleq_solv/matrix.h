@@ -4,39 +4,27 @@
 class matrix
 {
 	protected:
-		double** _arr;
 		matrix();
 	public:
 		virtual ~matrix();	
 
 		void print();
 		virtual int raw() = 0;
-		virtual double get() = 0;
-		virtual void set() = 0;		
+		virtual int col() = 0;
+		virtual double get(int, int) = 0;
+		virtual void set(int, int) = 0;		
 };
 
 class double_matrix : public matrix
 {
 	private:
+		double** _arr;
 		int _raw;
 		int _col;
 	public:
 		double_matrix(int, int);
 		~double_matrix();		
 	
-		int raw() override;
-		double get() override;
-		void set() override;
-};
-
-class double_vec : public matrix
-{
-	private:
-		int _len;
-	public:
-		double_vec(int);	
-		~double_vec();		
-		
 		int raw() override;
 		double get() override;
 		void set() override;

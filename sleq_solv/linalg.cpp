@@ -3,7 +3,7 @@
 
 using namespace std;
 
-double_vec gauss(const double_matrix& a)
+double* gauss(const double_matrix& a)
 {
     double temp;
 	int n = a.raw() - 1;
