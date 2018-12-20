@@ -1,7 +1,9 @@
 #ifndef INT_MATRIX_H
 #define INT_MATRIX_H
 
-#include "../class_int_arr/int_arr.h"
+#if !defined(INT_ARR_H)
+	#include "../class_int_arr/int_arr.h"
+#endif
 
 class int_matrix : public int_arr
 {

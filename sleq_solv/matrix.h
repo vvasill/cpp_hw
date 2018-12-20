@@ -3,41 +3,43 @@
 
 class matrix
 {
-	private:
-		int _col;
-		int_matrix();
+	protected:
+		double** _arr;
+		matrix();
 	public:
-		int_matrix(int, int);
-		int_matrix(const int_matrix&);
-		int_matrix(const int_arr&);
-		~int_matrix();	
-		
-		int col() const;
-		int raw() const;
-		int get_el(int, int) const;
-		int_arr vec_from_col(int) const;
-		int_arr vec_from_raw(int) const;
-		void set_el(int, int, int);
-		void print_matrix() const;
-		int_matrix tr() const;
+		virtual ~matrix();	
 
-		int_matrix& operator= (const int_matrix&);
-		int_matrix& operator= (const int_arr&);
-		int operator() (const int, const int) const;
-		int_matrix& operator+= (const int_matrix&);
-		int_matrix& operator-= (const int_matrix&);
-		int_matrix operator+ (const int_matrix&) const;
-		int_matrix operator- (const int_matrix&) const;
-		int_matrix operator* (const int_matrix&) const;	
-		int_matrix operator& (const int_matrix&) const;
+		void print();
+		virtual int raw() = 0;
+		virtual double get() = 0;
+		virtual void set() = 0;		
 };
 
 class double_matrix : public matrix
 {
+	private:
+		int _raw;
+		int _col;
+	public:
+		double_matrix(int, int);
+		~double_matrix();		
+	
+		int raw() override;
+		double get() override;
+		void set() override;
 };
 
 class double_vec : public matrix
 {
+	private:
+		int _len;
+	public:
+		double_vec(int);	
+		~double_vec();		
+		
+		int raw() override;
+		double get() override;
+		void set() override;
 };
 
 #endif // MATRIX_H

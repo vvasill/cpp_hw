@@ -6,16 +6,16 @@ using namespace std;
 
 //constructors
 
-int_arr::int_arr(int size)
-{
-	_arr = new int[size];
-	_size = size;
-}
-
 int_arr::int_arr()
 {
 	_arr = NULL;
 	_size = 0;
+}
+
+int_arr::int_arr(int size)
+{
+	_arr = new int[size];
+	_size = size;
 }
 
 int_arr::int_arr(const int_arr& that)
