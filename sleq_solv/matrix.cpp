@@ -10,24 +10,27 @@ using namespace std;
 plain_matrix::plain_matrix()
 {
 	_arr = NULL;
-	_raw = 0;
+	_row = 0;
 	_col = 0;
 }
 
-plain_matrix::plain_matrix(int n, int m)
+plain_matrix::plain_matrix(const int n, const int m)
 {
-	_raw = n;
+	double** _arr = new double*[n];
+    for (int i = 0; i < n; i++)
+        _arr[i] = new double [m];
+	_row = n;
 	_col = m;
-	double **_arr = new double*[m];
-	for (int i = 0; i < n; i++)	
-		_arr[i] = new double[m];
 }
 
 plain_matrix::~plain_matrix()
 {
-	for (int i = 0; i < raw(); i++)	
-		delete [] _arr[i];
-	delete [] _arr;
+	if ( _arr != NULL )	
+	{
+		for (int i = 0; i < _row; i++) 
+			delete [] _arr[i];
+		delete [] _arr;
+	}
 }
 
 int plain_matrix::col() const
@@ -35,14 +38,14 @@ int plain_matrix::col() const
 	return _col;
 }
 
-int plain_matrix::raw() const
+int plain_matrix::row() const
 {
-	return _raw;
+	return _row;
 }
 
 double plain_matrix::get(int i, int j) const
 {
-	if (i >= raw() or j >= col())
+	if (i >= row() or j >= col())
 	{
 		cout << "index out of range" << endl;
 		exit(0); 
@@ -53,7 +56,7 @@ double plain_matrix::get(int i, int j) const
 
 void plain_matrix::set(int i, int j, int num)
 {
-	if (i >= raw() or j >= col())
+	if (i >= row() or j >= col())
 	{
 		cout << "index out of range" << endl;
 		exit(0); 
@@ -64,7 +67,7 @@ void plain_matrix::set(int i, int j, int num)
 
 void plain_matrix::print() const
 {
-	for(int i = 0; i < raw(); i++)
+	for(int i = 0; i < row(); i++)
 	{
 		for(int j = 0; j < col(); j++)
 			cout << get(i, j) << " ";

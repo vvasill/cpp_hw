@@ -4,31 +4,35 @@
 class matrix
 {
 	public:
-		virtual int raw() = 0;
-		virtual int col() = 0;
-		virtual double get(int, int) = 0;
+		virtual int row() const = 0;
+		virtual int col() const = 0;
+		virtual double get(int, int) const = 0;
 		virtual void set(int, int, int) = 0;		
-		virtual void print() = 0;
+		virtual void print() const = 0;
 	
-		virtual int operator() (const int, const int) = 0;
+		//virtual int operator() (const int, const int) const = 0;
 };
 
 class plain_matrix : public matrix
 {
 	private:
 		double** _arr;
-		int _raw;
+		int _row;
 		int _col;
-		plain_matrix();
+		int test;
 	public:
+		plain_matrix();
 		plain_matrix(int, int);
+		plain_matrix(const plain_matrix&);
 		~plain_matrix();		
 	
-		int raw() const;
-		int col() const;
-		double get(int, int) const;
-		void set(int, int, int);
-		void print() const;
+		virtual int row() const;
+		virtual int col() const;
+		virtual double get(int, int) const;
+		virtual void set(int, int, int);
+		virtual void print() const;
+		
+		//virtual int operator() (const int, const int) const;
 };
 
 #endif // MATRIX_H

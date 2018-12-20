@@ -17,10 +17,10 @@ class int_matrix : public int_arr
 		~int_matrix();	
 		
 		int col() const;
-		int raw() const;
+		int row() const;
 		int get_el(int, int) const;
 		int_arr vec_from_col(int) const;
-		int_arr vec_from_raw(int) const;
+		int_arr vec_from_row(int) const;
 		void set_el(int, int, int);
 		void print_matrix() const;
 		int_matrix tr() const;

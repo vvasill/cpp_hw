@@ -31,7 +31,7 @@ int_arr::int_arr(const int_arr& that)
 int_arr::~int_arr()
 {
 	if ( _arr != NULL )	
-		delete[] _arr;
+		delete [] _arr;
 }
 
 //======================================================================================

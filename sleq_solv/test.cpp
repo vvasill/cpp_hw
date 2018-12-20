@@ -16,16 +16,19 @@ int main(int argc, char* argv[])
 	f_in.open("ex.txt");
 	f_in >> n;
 		
-	plain_matrix a = plain_matrix(n, n+1);
+	plain_matrix a = plain_matrix(n,n+1);
+	matrix& pt = a;
 
-	for (int i = 0; i < n; i++)
+	cout << a.row() << " " << a.col() << endl;
+
+	/*for (int i = 0; i < n; i++)
 		for (int j = 0; j < n+1; j++)
 		{
-			f_in >> temp;
-			a.set(i, j, temp);
+			//f_in >> temp;
+			//a.set(i, j, temp);
 		}
 	
-	a.print();
+	a.print();*/
 
 	return 0;	
 }

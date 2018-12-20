@@ -3,11 +3,11 @@
 
 using namespace std;
 
-double* gauss(const double_matrix& a)
+double* gauss(const matrix& a)
 {
     double temp;
-	int n = a.raw() - 1;
-	double x = new double*[a.raw()];
+	int n = a.row() - 1;
+	double x = new double*[a.row()];
 
     for (int j = 0; j < n - 1; j++)
         for (int i = j + 1; i < n; i++)
@@ -31,9 +31,9 @@ double* gauss(const double_matrix& a)
 	return x;
 }
 
-double* min_res(const double_matrix& a)
+double* min_res(const matrix& a)
 {
-	double x = new double*[a.raw()];
+	double x = new double*[a.row()];
 	//smth
 	return x;
 }

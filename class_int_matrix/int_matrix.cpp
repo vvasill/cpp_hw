@@ -93,16 +93,16 @@ int_matrix int_matrix::operator- (const int_matrix& that) const
 
 int_matrix int_matrix::operator* (const int_matrix& that) const
 {
-	if	(col() == that.raw())
+	if	(col() == that.row())
 	{
-		int_matrix result(raw()*that.col(), that.col());
+		int_matrix result(row()*that.col(), that.col());
 		int temp;
-		int_arr vec1;
-		int_arr vec2;
+		int_arr vec1 = int_arr();
+		int_arr vec2 = int_arr();
 
-		for(int i = 0; i < raw(); i++)
+		for(int i = 0; i < row(); i++)
 		{
-			vec1 = vec_from_raw(i);
+			vec1 = vec_from_row(i);
 			for(int j = 0; j < that.col(); j++)
 			{
 				vec2 = that.vec_from_col(j);
@@ -129,10 +129,10 @@ int int_matrix::col() const
 	return _col;
 }
 
-int int_matrix::raw() const
+int int_matrix::row() const
 {
-	int raw = int(size()/col());
-	return raw;
+	int row = int(size()/col());
+	return row;
 }
 
 int int_matrix::get_el(int i, int j) const
@@ -142,13 +142,13 @@ int int_matrix::get_el(int i, int j) const
 
 int_arr int_matrix::vec_from_col(int n) const
 {
-	int_arr result = int_arr(raw());
+	int_arr result = int_arr(row());
 	for(int i = 0; i < result.size(); i++)
 		result.set(i, get_el(i, n));
 	return result;
 }
 
-int_arr int_matrix::vec_from_raw(int n) const
+int_arr int_matrix::vec_from_row(int n) const
 {
 	int_arr result = int_arr(col());
 	for(int j = 0; j < result.size(); j++)
@@ -163,7 +163,7 @@ void int_matrix::set_el(int i, int j, int num)
 
 void int_matrix::print_matrix() const
 {
-	for(int i = 0; i < raw(); i++)
+	for(int i = 0; i < row(); i++)
 	{
 		for(int j = 0; j < col(); j++)
 			cout << get_el(i, j) << " ";
@@ -173,8 +173,8 @@ void int_matrix::print_matrix() const
 
 int_matrix int_matrix::tr() const
 {
-	int_matrix result = int_matrix(size(), raw());
-	for(int i = 0; i < raw(); i++)
+	int_matrix result = int_matrix(size(), row());
+	for(int i = 0; i < row(); i++)
 		for(int j = 0; j < col(); j++)
 			result.set_el(j, i, get_el(i,j));
 	return result;
