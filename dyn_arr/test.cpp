@@ -4,13 +4,13 @@
 
 using namespace std;
 
-int main( int argc, char* argv[] )
+int main(int argc, char* argv[])
 {
 	
 	srand(time(0));
 	int size, min, max;
 	
-	//size = atoi( argv[1] );
+	//size = atoi(argv[1]);
 	cin >> size;
 	cin >> min;
 	cin >> max;
