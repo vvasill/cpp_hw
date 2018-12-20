@@ -7,7 +7,7 @@ double* gauss(const double_matrix& a)
 {
     double temp;
 	int n = a.raw() - 1;
-	double_vec x = double_vec(a.raw());
+	double x = new double*[a.raw()];
 
     for (int j = 0; j < n - 1; j++)
         for (int i = j + 1; i < n; i++)
@@ -15,7 +15,7 @@ double* gauss(const double_matrix& a)
             temp = a(i,j) / a(j,j);
 
             for (int k = j; k < n + 1; k++)
-                  a(i,k) = a(i,k)- temp * a(j,k);
+                  a(i,k) = a(i,k) - temp * a(j,k);
         }
     
     x(n) = a(n,n + 1) / a(n,n);
@@ -31,6 +31,9 @@ double* gauss(const double_matrix& a)
 	return x;
 }
 
-double_vec min_res(const double_matrix& a)
+double* min_res(const double_matrix& a)
 {
+	double x = new double*[a.raw()];
+	//smth
+	return x;
 }

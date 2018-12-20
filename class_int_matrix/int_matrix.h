@@ -28,6 +28,7 @@ class int_matrix : public int_arr
 		int_matrix& operator= (const int_matrix&);
 		int_matrix& operator= (const int_arr&);
 		int operator() (const int, const int) const;
+		int& operator() (const int, const int);
 		int_matrix& operator+= (const int_matrix&);
 		int_matrix& operator-= (const int_matrix&);
 		int_matrix operator+ (const int_matrix&) const;

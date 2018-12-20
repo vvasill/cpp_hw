@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//======================================================================================
 //constructors
 
 int_matrix::int_matrix() : int_arr()
@@ -13,15 +14,10 @@ int_matrix::int_matrix() : int_arr()
 
 int_matrix::int_matrix(int size, int n) : int_arr(size) 
 {
-	if	(size%n != 0)
-	{
-		cout << "operation is forbidden" << endl;
-		exit(0);	
-	}
-	else
-	{
+	if	(size%n == 0)
 		_col = n;
-	}
+	else
+		throw length_error("length error");
 }
 
 int_matrix::int_matrix(const int_matrix& that) : int_arr(that)
@@ -38,7 +34,7 @@ int_matrix::~int_matrix()
 {
 }
 
-//----------------------------------------------------------------------------------------------
+//======================================================================================
 //operators
 
 int_matrix& int_matrix::operator= (const int_matrix& that)
@@ -58,6 +54,11 @@ int_matrix& int_matrix::operator= (const int_arr& that)
 int int_matrix::operator() (const int i, const int j) const
 {
 	get(j + i*col());
+}
+
+int& int_matrix::operator() (const int i, const int j)
+{
+	return (*this)[j + i*col()];
 }
 
 int_matrix& int_matrix::operator+= (const int_matrix& that)
@@ -92,12 +93,7 @@ int_matrix int_matrix::operator- (const int_matrix& that) const
 
 int_matrix int_matrix::operator* (const int_matrix& that) const
 {
-	if	(col() != that.raw())
-	{
-		cout << "operation is forbidden" << endl;
-		exit(0);	
-	}
-	else
+	if	(col() == that.raw())
 	{
 		int_matrix result(raw()*that.col(), that.col());
 		int temp;
@@ -117,6 +113,8 @@ int_matrix int_matrix::operator* (const int_matrix& that) const
 
 		return result;
 	}
+	else
+		throw length_error("operation is forbidden");
 }	
 		
 int_matrix int_matrix::operator& (const int_matrix& that) const
@@ -124,7 +122,7 @@ int_matrix int_matrix::operator& (const int_matrix& that) const
 	int_arr::operator& (that);
 }
 
-//----------------------------------------------------------------------------------------------
+//======================================================================================
 //functions
 int int_matrix::col() const
 {

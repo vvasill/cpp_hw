@@ -3,31 +3,32 @@
 
 class matrix
 {
-	protected:
-		matrix();
 	public:
-		virtual ~matrix();	
-
-		void print();
 		virtual int raw() = 0;
 		virtual int col() = 0;
 		virtual double get(int, int) = 0;
-		virtual void set(int, int) = 0;		
+		virtual void set(int, int, int) = 0;		
+		virtual void print() = 0;
+	
+		virtual int operator() (const int, const int) = 0;
 };
 
-class double_matrix : public matrix
+class plain_matrix : public matrix
 {
 	private:
 		double** _arr;
 		int _raw;
 		int _col;
+		plain_matrix();
 	public:
-		double_matrix(int, int);
-		~double_matrix();		
+		plain_matrix(int, int);
+		~plain_matrix();		
 	
-		int raw() override;
-		double get() override;
-		void set() override;
+		int raw() const;
+		int col() const;
+		double get(int, int) const;
+		void set(int, int, int);
+		void print() const;
 };
 
 #endif // MATRIX_H

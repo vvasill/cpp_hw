@@ -4,20 +4,65 @@
 
 using namespace std;
 
-//constructors
+//=======================================================
+//plain_matrix::
 
-matrix::matrix()
+plain_matrix::plain_matrix()
 {
 	_arr = NULL;
+	_raw = 0;
+	_col = 0;
 }
 
-matrix::~matrix()
+plain_matrix::plain_matrix(int n, int m)
 {
-	if ( _arr != NULL )	
-		delete[] _arr;
+	_raw = n;
+	_col = m;
+	double **_arr = new double*[m];
+	for (int i = 0; i < n; i++)	
+		_arr[i] = new double[m];
 }
 
-void matrix::print()
+plain_matrix::~plain_matrix()
+{
+	for (int i = 0; i < raw(); i++)	
+		delete [] _arr[i];
+	delete [] _arr;
+}
+
+int plain_matrix::col() const
+{
+	return _col;
+}
+
+int plain_matrix::raw() const
+{
+	return _raw;
+}
+
+double plain_matrix::get(int i, int j) const
+{
+	if (i >= raw() or j >= col())
+	{
+		cout << "index out of range" << endl;
+		exit(0); 
+	}
+	else
+		return _arr[i][j];
+}
+
+void plain_matrix::set(int i, int j, int num)
+{
+	if (i >= raw() or j >= col())
+	{
+		cout << "index out of range" << endl;
+		exit(0); 
+	}
+	else
+		_arr[i][j] = num;
+}
+
+void plain_matrix::print() const
 {
 	for(int i = 0; i < raw(); i++)
 	{
@@ -25,15 +70,4 @@ void matrix::print()
 			cout << get(i, j) << " ";
 		cout << endl;
 	}
-}
-
-double_matrix::double_matrix(int n, int m)
-{
-	_arr = new double[n][m];
-	_raw = n;
-	_col = m;
-}
-
-double_matrix::~double_matrix()
-{
 }

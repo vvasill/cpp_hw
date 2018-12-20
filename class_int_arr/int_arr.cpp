@@ -1,9 +1,11 @@
 #include "int_arr.h"
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 
 using namespace std;
 
+//======================================================================================
 //constructors
 
 int_arr::int_arr()
@@ -32,7 +34,7 @@ int_arr::~int_arr()
 		delete[] _arr;
 }
 
-//----------------------------------------------------------------------------------------------
+//======================================================================================
 //operators
 
 int_arr& int_arr::operator= (const int_arr& that)
@@ -50,54 +52,48 @@ int_arr& int_arr::operator= (const int_arr& that)
 
 int int_arr::operator[] (const int i) const
 {
-	if (i >= size()) 
-	{ 
-		cout << "index out of range" << endl; 
-		exit(0); 
-	}
+	if (i < size()) 
+		return get(i); 
 	else
-		return get(i);
+		throw invalid_argument("index out of range");
+}
+
+int& int_arr::operator[] (const int i)
+{
+	if (i < size()) 
+		return _arr[i];
+	else
+		throw invalid_argument("index out of range");
 }
 
 int_arr& int_arr::operator+= (const int_arr& that)
 {
-	if (size() != that.size()) 
-	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
+	if (size() == that.size()) 
 	{
 		for(int i = 0; i < size(); i++)
 			set(i, get(i) + that[i]);
 		return *this;
-	}	
+	}
+	else	
+		throw length_error("operation is forbidden");
 }
 
 int_arr& int_arr::operator-= (const int_arr& that)
 {
-	if (size() != that.size()) 
-	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
+	if (size() == that.size()) 
 	{
 		for(int i = 0; i < size(); i++)
-			set(i, get(i) - that[i]);
+			set(i, get(i) + that[i]);
 		return *this;
-	}	
+	}
+	else	
+		throw length_error("operation is forbidden");	
 }
 
 int_arr operator+(const int_arr& first_that, const int_arr& second_that)
 {
-	if (first_that.size() != second_that.size()) 
+	if (first_that.size() == second_that.size()) 
 	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
-	{
 		int res_size = first_that.size() + second_that.size();
 		int_arr result = int_arr(res_size);
 
@@ -106,34 +102,28 @@ int_arr operator+(const int_arr& first_that, const int_arr& second_that)
 
 		return result;
 	}
+	else
+		throw length_error("operation is forbidden");
 }
 
 int_arr int_arr::operator-(const int_arr& that) const
 {
-	if (size() != that.size()) 
+	if (size() == that.size()) 
 	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
-	{
 		int_arr result = int_arr(size());
 
 		for(int i = 0; i < size(); i++)
 			result.set(i, get(i) - that[i]);
 
-		return result;
+		return result; 
 	}
+	else
+		throw length_error("operation is forbidden");
 }
 
 int int_arr::operator*(const int_arr& that) const
 {
-	if (size() != that.size()) 
-	{ 
-		cout << "operation is forbidden" << endl; 
-		exit(0); 
-	}
-	else
+	if (size() == that.size()) 
 	{
 		int result = 0;
 
@@ -142,6 +132,8 @@ int int_arr::operator*(const int_arr& that) const
 
 		return result;
 	}
+	else
+		throw length_error("operation is forbidden");
 }
 
 int_arr int_arr::operator& (const int_arr& that) const
@@ -157,7 +149,7 @@ int_arr int_arr::operator& (const int_arr& that) const
 	return result;
 }
 
-//--------------------------------------------------------------------------------------
+//======================================================================================
 //functions
 
 int int_arr::size() const
@@ -167,24 +159,18 @@ int int_arr::size() const
 
 void int_arr::set(int i, int num)
 {
-	if (i >= _size)
-	{
-		cout << "index out of range" << endl;
-		exit(0); 
-	}
-	else
+	if (i < size())
 		_arr[i] = num;
+	else
+		throw invalid_argument("index out of range");
 }
 
 int int_arr::get(int i) const
 {
-	if (i >= _size)
-	{
-		cout << "index out of range" << endl;
-		exit(0); 
-	}
-	else
+	if (i < size())
 		return(_arr[i]);
+	else
+		throw invalid_argument("index out of range");
 }
 
 void int_arr::init(int min, int max)
@@ -218,7 +204,7 @@ bool int_arr::check_size(int limit) const
 	bool check;
 
 	size = sizeof(_arr) + (sizeof(int) * _size);
-	if (size < limit*1024) 
+	if (size < limit) 
 		check = true;
 	else 
 		check = false;

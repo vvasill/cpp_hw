@@ -24,6 +24,7 @@ class int_arr
 
 		int_arr& operator= (const int_arr&);
 		int operator[] (const int) const;
+		int& operator[] (const int);
 		int_arr& operator+= (const int_arr&);
 		int_arr& operator-= (const int_arr&);
 		friend int_arr operator+ (const int_arr&, const int_arr&);
