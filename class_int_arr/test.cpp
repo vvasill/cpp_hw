@@ -49,6 +49,9 @@ int main( int argc, char* argv[] )
 
 	cout << arr*arr2 << endl;
 
+	arr2 = arr.increase_size(10);
+	arr2.print();
+
 	return 0;	
 	
 }

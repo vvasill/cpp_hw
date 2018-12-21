@@ -18,9 +18,9 @@ class int_arr
 		void init(int, int);	
 		void print() const;
 		void swap(int&, int&);
-		bool check_size(int) const;
-		void increase_size(int);
 		void sort();
+		bool check_size(int) const;
+		int_arr increase_size(int);
 
 		int_arr& operator= (const int_arr&);
 		int operator[] (const int) const;

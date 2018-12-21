@@ -198,28 +198,6 @@ void int_arr::swap(int &a, int &b)
 	b = temp;
 }
 
-bool int_arr::check_size(int limit) const
-{
-	int size;
-	bool check;
-
-	size = sizeof(_arr) + (sizeof(int) * _size);
-	if (size < limit) 
-		check = true;
-	else 
-		check = false;
-
-	return(check);
-}
-
-void int_arr::increase_size(int inc)
-{
-	int new_size = size() + inc;
-	_size = new_size;
-	for (int i = 1; i < new_size; i++)
-		set(i, 0);
-}
-
 void int_arr::sort()
 {
 	int n = size();
@@ -235,4 +213,33 @@ void int_arr::sort()
 			}
         n--;
     } while (swapped  == true);
+}
+
+bool int_arr::check_size(int limit) const
+{
+	int size;
+	bool check;
+
+	size = sizeof(_arr) + (sizeof(int) * _size);
+	if (size < limit) 
+		check = true;
+	else 
+		check = false;
+
+	return(check);
+}
+
+int_arr int_arr::increase_size(int inc)
+{
+	int old_size = size();
+	int new_size = size() + inc;
+
+	int_arr result = int_arr(new_size);
+
+	for (int i = 0; i < old_size; i++)
+		result.set(i, get(i));
+	for (int i = old_size; i < new_size; i++)
+		result.set(i, 0); 
+	
+	return result;
 }

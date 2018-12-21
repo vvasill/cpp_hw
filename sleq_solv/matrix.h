@@ -13,14 +13,14 @@ class matrix
 
 class plain_matrix : public matrix
 {
-	public:
-		double** _arr;
+	private:
 		int _row;
 		int _col;
-	//public:
+		double** _arr;
+	public:
 		plain_matrix();
 		plain_matrix(int, int);
-		//plain_matrix(const plain_matrix&);
+		plain_matrix(const plain_matrix&);
 		~plain_matrix();		
 	
 		virtual int row() const;

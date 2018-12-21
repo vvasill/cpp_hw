@@ -10,19 +10,31 @@ using namespace std;
 
 plain_matrix::plain_matrix()
 {
-	_arr = NULL;
 	_row = 0;
 	_col = 0;
+	_arr = NULL;
 }
 
 plain_matrix::plain_matrix(const int n, const int m)
 {
+	_row = n;
+	_col = m;
 	_arr = new double*[n];
     for (int i = 0; i < n; i++)
         _arr[i] = new double [m];
-	_arr[1][1] = 10;
-	_row = n;
-	_col = m;
+}
+
+plain_matrix::plain_matrix(const plain_matrix& that)
+{
+	_row = that.row();
+	_col = that.col();
+	_arr = new double*[_row];
+    for (int i = 0; i < _row; i++)
+        _arr[i] = new double [_col];
+
+	for(int i = 0; i < _row; i++)
+		for (int j = 0; j < _col; j++)
+			_arr[i][j] = that._arr[i][j];
 }
 
 plain_matrix::~plain_matrix()
@@ -38,7 +50,32 @@ plain_matrix::~plain_matrix()
 //=======================================================
 //operators
 
-/*double plain_matrix::operator() (const int i, const int j) const
+/*plain_matrix& plain_matrix::operator= (const plain_matrix& that)
+{
+	cout << "I'm here!!!" << endl;
+	if (this != &that)
+	{	
+		if (_arr != NULL)	
+		{
+			for (int i = 0; i < _row; i++) 
+				delete [] _arr[i];
+			delete [] _arr;
+		}
+	
+		_row = that.row();
+		_col = that.col();
+		_arr = new double*[_row];
+    	for (int i = 0; i < _row; i++)
+        	_arr[i] = new double [_col];
+
+		for(int i = 0; i < _row; i++)
+			for (int j = 0; j < _col; j++)
+				_arr[i][j] = that._arr[i][j];
+	}
+	return *this;
+}
+
+double plain_matrix::operator() (const int i, const int j) const
 {
 	get(i,j);
 }
