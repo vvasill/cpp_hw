@@ -15,20 +15,23 @@ int main(int argc, char* argv[])
 	ifstream f_in;
 	f_in.open("ex.txt");
 	f_in >> n;
+	double* x = new double[n];
 		
-	plain_matrix a = plain_matrix(n,n+1);
-	matrix& pt = a;
+	matrix *a_ptr = new plain_matrix(n,n+1);
 
-	cout << a.row() << " " << a.col() << endl;
-
-	/*for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n+1; j++)
 		{
-			//f_in >> temp;
-			//a.set(i, j, temp);
+			f_in >> temp;
+			a_ptr->set(i, j, temp);
 		}
 	
-	a.print();*/
+	a_ptr->print();
 
+	gauss(a_ptr);
+
+	a_ptr->print();
+
+	delete a_ptr;
 	return 0;	
 }

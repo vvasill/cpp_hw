@@ -5,7 +5,7 @@
 	#include "matrix.h"
 #endif
 
-double* gauss(const matrix&);
-double* min_res(const matrix&);
+double* gauss(matrix*);
+double* min_res(matrix*);
 
 #endif // LINALG_H
