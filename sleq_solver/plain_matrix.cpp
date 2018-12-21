@@ -1,7 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
-#include "matrix.h"
+
+#ifndef PLAIN_MATRIX_H
+	#include "plain_matrix.h"
+#endif
 
 using namespace std;
 

@@ -1,15 +1,9 @@
+#ifndef PLAIN_MATRIX_H
+#define PLAIN_MATRIX_H
+	
 #ifndef MATRIX_H
-#define MATRIX_H
-
-class matrix
-{
-	public:
-		virtual int row() const = 0;
-		virtual int col() const = 0;
-		virtual double get(int, int) const = 0;
-		virtual void set(int, int, double) = 0;		
-		virtual void print() const = 0;
-};
+	#include "matrix.h"
+#endif
 
 class plain_matrix : public matrix
 {
@@ -30,4 +24,4 @@ class plain_matrix : public matrix
 		virtual void print() const;
 };
 
-#endif // MATRIX_H
+#endif // PLAIN_MATRIX_H

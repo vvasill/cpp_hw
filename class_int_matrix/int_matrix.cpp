@@ -40,7 +40,7 @@ int_matrix::~int_matrix()
 int_matrix& int_matrix::operator= (const int_matrix& that)
 {
 	int_arr::operator= (that);
-	_col = that.col();
+	_col = that._col;
 	return *this;
 }
 
@@ -53,12 +53,12 @@ int_matrix& int_matrix::operator= (const int_arr& that)
 
 int int_matrix::operator() (const int i, const int j) const
 {
-	get(j + i*col());
+	get(j + i*_col);
 }
 
 int& int_matrix::operator() (const int i, const int j)
 {
-	return (*this)[j + i*col()];
+	return (*this)[j + i*_col];
 }
 
 int_matrix& int_matrix::operator+= (const int_matrix& that)
@@ -79,7 +79,7 @@ int_matrix int_matrix::operator+ (const int_matrix& that) const
 {
 	int_matrix result = int_matrix();
 	result = operator+ (that);
-	result._col = col();
+	result._col = _col;
 	return result;
 }
 
@@ -87,7 +87,7 @@ int_matrix int_matrix::operator- (const int_matrix& that) const
 {
 	int_matrix result = int_matrix();
 	result = int_arr::operator- (that);
-	result._col = col();
+	result._col = _col;
 	return result;
 }
 

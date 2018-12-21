@@ -60,7 +60,7 @@ int int_arr::operator[] (const int i) const
 
 int& int_arr::operator[] (const int i)
 {
-	if (i < _size) 
+	if (i < size()) 
 		return _arr[i];
 	else
 		throw invalid_argument("index out of range");

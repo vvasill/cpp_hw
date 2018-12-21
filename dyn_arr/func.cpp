@@ -39,24 +39,10 @@ void sort(int* arr, const int arr_size)
                 swapped = true;
 			}
         n--;
-    } while (swapped  == true);
+    } while (swapped);
 }
 
-bool check_size(int* arr, const int arr_size, const int limit)
-{
-	int size;
-	bool check;
-
-	size = sizeof(arr) + (sizeof(int) * arr_size);
-	if (size < limit) 
-		check = true;
-	else 
-		check = false;
-
-	return(check);
-}
-
-int* increase_size(int* arr, int arr_size, const int inc)
+bool increase_size(int* &arr, int arr_size, const int inc)
 {
 	int new_size = arr_size + inc;
 
@@ -67,5 +53,6 @@ int* increase_size(int* arr, int arr_size, const int inc)
 	for (int i = arr_size; i < new_size; i++)
 		result[i] = 0;
 	
-	return result;
+	delete [] arr;	
+	arr = result;
 }

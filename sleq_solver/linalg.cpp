@@ -4,12 +4,11 @@
 
 using namespace std;
 
-matrix* gauss(matrix* a)
+bool gauss(matrix* a, matrix* x)
 {
     double temp;
 	int row = a->row();
 	int col = a->col();
-	matrix *x = new plain_matrix(row, 1);
 
     for (int j = 0; j < col-1; j++)
         for (int i = j+1; i < row; i++)
@@ -30,17 +29,16 @@ matrix* gauss(matrix* a)
         x->set(i, 0, temp / a->get(i, i));
     }
 	
-	return x;
+	return true;
 }
 
-matrix* min_res(matrix* a)
+bool min_res(matrix* a, matrix* x)
 {
 	double temp;
 	int row = a->row();
 	int col = a->col();
-	matrix *x = new plain_matrix(row, 1);
 
 	//smth
 
-	return x;
+	return true;
 }

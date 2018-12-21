@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main( int argc, char* argv[] )	
+int main(int argc, char* argv[])	
 {
 	srand(time(0));
 	int size, n, min, max;
@@ -26,7 +26,7 @@ int main( int argc, char* argv[] )
 	matrix.print_matrix();
 	cout << endl;
 
-	matrix.tr().print_matrix();
+	(matrix.tr()).print_matrix();
 	matrix2.init(min, max);
 	matrix2.print_matrix();
 	cout << endl;

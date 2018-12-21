@@ -2,7 +2,7 @@
 #define INT_MATRIX_H
 
 #if !defined(INT_ARR_H)
-	#include "../class_int_arr/int_arr.h"
+	#include "int_arr.h"
 #endif
 
 class int_matrix : public int_arr

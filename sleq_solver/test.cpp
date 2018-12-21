@@ -1,8 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include "linalg.h"
-#include "matrix.h"
+
+#ifndef LINALG_H
+	#include "linalg.h"
+#endif
+
+#ifndef PLAIN_MATRIX_H
+	#include "plain_matrix.h"
+#endif
 
 using namespace std;
 
@@ -28,7 +34,7 @@ int main(int argc, char* argv[])
 	cout << "input:" << endl;
 	a_ptr->print();
 
-	x_ptr = gauss(a_ptr);
+	gauss(a_ptr, x_ptr);
 	cout << "answer:" << endl;
 	x_ptr->print();
 

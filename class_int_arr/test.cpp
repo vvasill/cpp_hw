@@ -25,15 +25,6 @@ int main( int argc, char* argv[] )
 	arr.print();
 	arr2.print();
 
-	arr.set(1, 100);
-	arr.print();
-
-	arr = arr2;
-	arr.print();
-
-	arr2.init(min, max);
-	arr2.print();
-
 	arr += arr2;
 	arr.print();
 
@@ -42,7 +33,7 @@ int main( int argc, char* argv[] )
 
 	(arr&arr2).print();
 	
-	cout << arr[5] << endl;
+	cout << arr[0] << endl;
 
 	arr.sort();
 	arr.print();

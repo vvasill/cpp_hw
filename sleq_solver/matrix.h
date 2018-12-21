@@ -1,0 +1,14 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
+class matrix
+{
+	public:
+		virtual int row() const = 0;
+		virtual int col() const = 0;
+		virtual double get(int, int) const = 0;
+		virtual void set(int, int, double) = 0;		
+		virtual void print() const = 0;
+};
+
+#endif // MATRIX_H

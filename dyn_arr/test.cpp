@@ -21,8 +21,8 @@ int main(int argc, char* argv[])
 	sort(arr, size);
 	print(arr, size);
 
-	cout << check_size(arr, size, 5*1024) << endl;
-	print(increase_size(arr, size, 10), size + 10);
+	increase_size(arr, size, 10);
+	print(arr, size);
 	
 	return 0;	
 	

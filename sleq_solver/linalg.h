@@ -1,11 +1,11 @@
 #ifndef LINALG_H
 #define LINALG_H
 
-#if !defined(MATRIX_H)
+#ifndef MATRIX_H
 	#include "matrix.h"
 #endif
 
-matrix* gauss(matrix*);
-matrix* min_res(matrix*);
+bool gauss(matrix*, matrix*);
+bool min_res(matrix*, matrix*);
 
 #endif // LINALG_H
