@@ -8,7 +8,12 @@ class matrix
 		virtual int col() const = 0;
 		virtual double get(int, int) const = 0;
 		virtual void set(int, int, double) = 0;		
-		virtual void print() const = 0;
+		virtual void print() const = 0;	
+		virtual void init(double) = 0;
+
+		virtual matrix& operator= (const matrix& that) = 0;
+		//virtual matrix& operator+ (const matrix& that) const = 0;		
+		//virtual matrix& operator- (const matrix& that) const = 0;	
 };
 
 #endif // MATRIX_H

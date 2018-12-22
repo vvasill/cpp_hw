@@ -6,6 +6,6 @@
 #endif
 
 bool gauss(matrix*, matrix*);
-bool min_res(matrix*, matrix*);
+bool min_res(matrix*, matrix*, matrix*);
 
 #endif // LINALG_H

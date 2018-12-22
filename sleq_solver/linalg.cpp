@@ -35,11 +35,20 @@ bool gauss(matrix* a, matrix* x)
 	return true;
 }
 
-bool min_res(matrix* a, matrix* x)
+bool min_res(matrix* a, matrix* x, matrix* x_old)
 {
 	double temp;
 	int row = a->row();
 	int col = a->col();
+
+	double eps = 0.001;
+	x_old->init(1.0);
+	x = x_old + 2*eps;
+
+	while (x - x_old > eps)
+	{
+		cout << eps;
+	}
 
 	//smth
 

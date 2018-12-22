@@ -22,6 +22,11 @@ class plain_matrix : public matrix
 		virtual double get(int, int) const;
 		virtual void set(int, int, double);
 		virtual void print() const;
+		virtual void init(double);
+
+		virtual plain_matrix& operator= (const plain_matrix& that);	
+		//virtual plain_matrix operator+ (const plain_matrix& that) const;		
+		//virtual plain_matrix operator- (const plain_matrix& that) const;	
 };
 
 #endif // PLAIN_MATRIX_H

@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 	f_in >> n;
 	
 	matrix *x_ptr = new plain_matrix(n, 1);
+	matrix *x_temp_ptr = new plain_matrix(n, 1);
 	matrix *a_ptr = new plain_matrix(n, n+1);
 
 	for (int i = 0; i < n; i++)
@@ -38,11 +39,12 @@ int main(int argc, char* argv[])
 	cout << "answer:" << endl;
 	x_ptr->print();
 
-	min_res(a_ptr, x_ptr);
+	min_res(a_ptr, x_ptr, x_temp_ptr);
 	cout << "answer:" << endl;
 	x_ptr->print();
 
 	delete a_ptr;
 	delete x_ptr;
+	delete x_temp_ptr;
 	return 0;	
 }
