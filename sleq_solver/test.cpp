@@ -38,6 +38,10 @@ int main(int argc, char* argv[])
 	cout << "answer:" << endl;
 	x_ptr->print();
 
+	min_res(a_ptr, x_ptr);
+	cout << "answer:" << endl;
+	x_ptr->print();
+
 	delete a_ptr;
 	delete x_ptr;
 	return 0;	

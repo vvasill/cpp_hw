@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cstdlib>
-#include "linalg.h"
+
+#ifndef MATRIX_H
+	#include "linalg.h"
+#endif
 
 using namespace std;
 
