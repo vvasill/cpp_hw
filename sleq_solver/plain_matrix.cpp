@@ -109,14 +109,29 @@ matrix* plain_matrix::operator- (const matrix* that) const
 		throw length_error("operation is forbidden");
 }
 
-/*double plain_matrix::operator() (const int i, const int j) const
+matrix* plain_matrix::operator* (const matrix* that) const
 {
-	get(i,j);
+	if	(col() == that->row())
+	{
+		plain_matrix* res_ptr = new plain_matrix(row(), that->col());
+		double temp;
+
+		for(int i = 0; i < row(); i++)
+		{
+			for(int j = 0; j < that->col(); j++)
+			{
+				temp = 0;
+				for(int k = 0; k < col(); k++)
+					temp += get(i,k) * that->get(k,j);
+				res_ptr->set(i, j, temp);
+			}
+		}
+
+		return res_ptr;
+	}
+	else
+		throw length_error("operation is forbidden");
 }
-double& plain_matrix::operator() (const int i, const int j)
-{
-	return (*this)(i,j);
-}*/
 
 //=======================================================
 //functions
@@ -172,6 +187,15 @@ double plain_matrix::max()
 			if (get(i,j) > max)
 				max = get(i,j);
 	return max;
+}
+
+pla_matrix int_matrix::tr() const
+{
+	int_matrix result = int_matrix(size(), row());
+	for(int i = 0; i < row(); i++)
+		for(int j = 0; j < col(); j++)
+			result.set_el(j, i, get_el(i,j));
+	return result;
 }
 
 /*matrix* sub(matrix*, matrix*)

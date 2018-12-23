@@ -29,6 +29,7 @@ class plain_matrix : public matrix
 		//virtual plain_matrix* operator= (const plain_matrix* that);	
 		virtual matrix* operator+ (const matrix* that) const;		
 		virtual matrix* operator- (const matrix* that) const;	
+		virtual matrix* operator* (const matrix* that) const;
 };
 
 #endif // PLAIN_MATRIX_H

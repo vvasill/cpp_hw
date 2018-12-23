@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 			f_in >> temp;
 			a_ptr->set(i, j, temp);
 		}
+	f_in.close();
 	cout << "input:" << endl;
 	a_ptr->print();
 
@@ -51,6 +52,7 @@ int main(int argc, char* argv[])
 	x_ptr->print();
 
 	delete x_ptr;
+	delete a_ptr;
 	delete x_temp_ptr;
 	
 	//=======================================================
@@ -59,10 +61,8 @@ int main(int argc, char* argv[])
 	/*matrix *x_ptr = new crs_matrix(n, 1);
 	gauss(a_ptr, x_ptr);
 	cout << "answer:" << endl;
-	x_ptr->print();*/
-
-	delete a_ptr;
-	delete x_ptr;
+	x_ptr->print();
+	delete x_ptr;*/
 
 	return 0;	
 }
