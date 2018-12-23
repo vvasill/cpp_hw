@@ -26,7 +26,7 @@ class plain_matrix : public matrix
 		virtual double max();
 		//virtual matrix* sub(matrix*, matrix*);
 
-		//virtual plain_matrix* operator= (const plain_matrix* that);	
+		virtual matrix* operator= (const matrix* that);	
 		virtual matrix* operator+ (const matrix* that) const;		
 		virtual matrix* operator- (const matrix* that) const;	
 		virtual matrix* operator* (const matrix* that) const;

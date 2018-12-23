@@ -13,7 +13,7 @@ class matrix
 		virtual double max() = 0;
 		//virtual matrix* abs(matrix*) = 0;
 
-		//virtual matrix* operator= (const matrix* that) = 0;
+		virtual matrix* operator= (const matrix* that) = 0;
 		virtual matrix* operator+ (const matrix* that) const = 0;		
 		virtual matrix* operator- (const matrix* that) const = 0;	
 		virtual matrix* operator* (const matrix* that) const = 0;

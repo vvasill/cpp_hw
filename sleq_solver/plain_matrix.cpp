@@ -53,7 +53,7 @@ plain_matrix::~plain_matrix()
 //=======================================================
 //operators
 
-/*plain_matrix* plain_matrix::operator= (const plain_matrix* that)
+matrix* plain_matrix::operator= (const matrix* that)
 {
 	if (this != that)
 	{	
@@ -75,7 +75,7 @@ plain_matrix::~plain_matrix()
 				_arr[i][j] = that->_arr[i][j];
 	}
 	return this;
-}*/
+}
 
 matrix* plain_matrix::operator+ (const matrix* that) const
 {
