@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 
-#ifndef MATRIX_H
+#ifndef LINALG_H
 	#include "linalg.h"
 #endif
 
@@ -46,6 +46,10 @@ bool min_res(matrix* a, matrix* x, matrix* x_old)
 	
 	for (int i = 0; i < row; i++)    
 		x->set(i, 0, x_old->get(i,0) + 2*eps);
+
+	temp = a->max();
+
+	((*x) + x)->print();
 
 	/*while ( max( abs(sub(x, x_old)) ) > eps )
 	{

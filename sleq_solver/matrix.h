@@ -10,11 +10,12 @@ class matrix
 		virtual void set(int, int, double) = 0;		
 		virtual void print() const = 0;	
 		virtual void init(double) = 0;
-		//virtual int max(matrix*) = 0;
+		virtual double max() = 0;
+		//virtual matrix* sub(matrix*, matrix*) = 0;
 		//virtual matrix* abs(matrix*) = 0;
 
 		//virtual matrix* operator= (const matrix* that) = 0;
-		//virtual matrix* operator+ (const matrix& that) const = 0;		
+		virtual matrix* operator+ (const matrix* that) const = 0;		
 		//virtual matrix& operator- (const matrix& that) const = 0;	
 };
 

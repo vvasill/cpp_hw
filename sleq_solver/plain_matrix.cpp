@@ -77,7 +77,7 @@ plain_matrix::~plain_matrix()
 	return this;
 }*/
 
-/*plain_matrix* plain_matrix::operator+ (const plain_matrix& that) const
+matrix* plain_matrix::operator+ (const matrix* that) const
 {
 	if (col() == that->col() and row() == that->row()) 
 	{ 
@@ -91,23 +91,23 @@ plain_matrix::~plain_matrix()
 	}
 	else
 		throw length_error("operation is forbidden");
-}*/
+}
 
-/*plain_matrix plain_matrix::operator- (const plain_matrix& that) const
+plain_matrix plain_matrix::operator- (const plain_matrix& that) const
 {
-	if (col() == that.col() and row() == that.row()) 
+	if (col() == that->col() and row() == that->row()) 
 	{ 
-		plain_matrix result = plain_matrix(row(), col());
+		plain_matrix* res_ptr = new plain_matrix(row(), col());
 
 		for(int i = 0; i < row(); i++)
 			for(int j = 0; j < col(); j++)
-				result.set(i, j, get(i,j) - that.get(i,j));
+				res_ptr->set(i, j, get(i,j) + that->get(i,j));
 
-		return result; 
+		return res_ptr; 
 	}
 	else
 		throw length_error("operation is forbidden");
-}*/
+}
 
 /*double plain_matrix::operator() (const int i, const int j) const
 {
@@ -164,8 +164,17 @@ void plain_matrix::init(double num)
 			set(i, j, num);
 }
 
-/*int plain_matrix::max(plain_matrix* that)
+double plain_matrix::max()
 {
-	int temp = 0;
-	return 1;
+	int max = 0;
+	for(int i = 0; i < row(); i++)
+		for(int j = 0; j < col(); j++)
+			if (get(i,j) > max)
+				max = get(i,j);
+	return max;
+}
+
+/*matrix* sub(matrix*, matrix*)
+{
+	return 
 }*/

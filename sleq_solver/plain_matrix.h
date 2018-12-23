@@ -23,11 +23,12 @@ class plain_matrix : public matrix
 		virtual void set(int, int, double);
 		virtual void print() const;
 		virtual void init(double);
-		//virtual int max(plain_matrix*);
+		virtual double max();
+		//virtual matrix* sub(matrix*, matrix*);
 
 		//virtual plain_matrix* operator= (const plain_matrix* that);	
-		//virtual plain_matrix* operator+ (const plain_matrix& that) const;		
-		//virtual plain_matrix operator- (const plain_matrix& that) const;	
+		virtual matrix* operator+ (const matrix* that) const;		
+		virtual matrix* operator- (const matrix* that) const;	
 };
 
 #endif // PLAIN_MATRIX_H
