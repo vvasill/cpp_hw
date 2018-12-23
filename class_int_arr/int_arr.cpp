@@ -176,17 +176,13 @@ int int_arr::get(int i) const
 void int_arr::init(int min, int max)
 {
 	for(int i = 0; i < size(); i++)
-	{
 		set(i, int( ( float(rand())/RAND_MAX * max ) ) + min);
-	}
 }
 
 void int_arr::print() const
 {
 	for(int i = 0; i < _size; i++)
-	{
 		cout << _arr[i] << " ";
-	}
 	cout << endl;
 }
 

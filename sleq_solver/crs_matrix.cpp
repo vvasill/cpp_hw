@@ -15,15 +15,17 @@ crs_matrix::crs_matrix()
 {
 	_row = 0;
     _col = 0;
+	_nzn = 0;
 	_MEl = NULL;
 	_CI = NULL;
 	_SII = NULL;
 }
 
-crs_matrix::crs_matrix(const int n, const int m)
+crs_matrix::crs_matrix(const int n, const int m, const int nzn)
 {
 	_row = n;
 	_col = m;
+	_nzn = nzn;
 	_MEl = NULL;
 	_CI = NULL;
 	_SII = new double[n+1];
@@ -31,81 +33,27 @@ crs_matrix::crs_matrix(const int n, const int m)
         _SII[i] = 0;
 }
 
+crs_matrix::crs_matrix(const int n, const int m, const int k, double* a, double* b, double* c)
+{
+	_row = n;
+	_col = m;
+	_nzn = 0;
+
+	//smth
+}
+
 crs_matrix::crs_matrix(const int n, const int m, const double** that)
 {
 	_row = n;
 	_col = m;
-	int q = 0, number = 0;
+	_nzn = 0;
 
-    for (int i = 0; i < _row; i++)
-        for (int j = 0; j < _col; j++)
-            if (that[i][j] != 0.0)
-				number++;
-
-    _MEl = new double[number];
-    _CI = new int[number];
-    _SII = new int[_row + 1];
-    int *temp = new int[number];
-
-    temp[0] = 0;
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < ; j++) {
-            if (Mat(i, j) != 0) {
-                element[q] = Mat(i, j);
-                ColIndex[q] = j;
-                nStrInpt[q] = i;
-                q++;
-            }
-        }
-    }
-
-    bool par = true;
-    int g = 1, s = 0, d = 0, k = 0;
-
-    for (int l = 0; l <= number; l++) {
-        // if start lines are zeros
-        if (nStrInpt[l] > 0 && s == 0) {
-            g = nStrInpt[l] - 1;
-            for (int f = 0; f <= g; f++) {
-                StrInpt[k] = d;
-                k++;
-            }
-        }
-        // nonzero lines
-        if (nStrInpt[l] != nStrInpt[l - 1] && s == 1) {
-            par = true;
-            d++;
-            g = nStrInpt[l] - nStrInpt[l - 1];
-            if (g > 1) {
-                for (int f = 1; f < g; f++) {
-                    StrInpt[k] = d;
-                    k++;
-                }
-            }
-        }
-        if (par) {
-            StrInpt[k] = d;
-            k++;
-            par = false;
-        } else d = d + 1;
-        s = 1;
-    }
-
-    // if last lines are zeros
-    if (k != Mat.getNstr() + 1) {
-        int h = (Mat.getNstr() + 1 - k);
-        for (int f = 0; f < h; f++) {
-            StrInpt[k] = d;
-            k++;
-        }
-    }
-
-    StrInpt[Mat.getNstr()] = number;
+	//smth    
 }
 
 crs_matrix::crs_matrix(const crs_matrix& that)
 {
-	_row = that.row();
+	/*_row = that.row();
 	_col = that.col();
 	_arr = new double*[_row];
 	_CI = new double*[_row;
@@ -113,7 +61,7 @@ crs_matrix::crs_matrix(const crs_matrix& that)
 
 	for(int i = 0; i < _row; i++)
 		for (int j = 0; j < _col; j++)
-			_arr[i][j] = that._arr[i][j];
+			_arr[i][j] = that._arr[i][j];*/
 }
 
 crs_matrix::~crs_matrix()
@@ -169,15 +117,12 @@ void crs_matrix::print() const
 	}
 }
 
-void crs_matrix::init(double num)
+void crs_matrix::init(const int min, const int max)
 {
-	for(int i = 0; i < row(); i++)
-		for(int j = 0; j < col(); j++)
-			set(i, j, num);
-}
-
-int crs_matrix::max(crs_matrix* that)
-{
-	int temp = 0;
-	return 1;
+	for(int i = 0; i < _nzn; i++)
+		_MEl[i] = int( ( float(rand())/RAND_MAX * max ) ) + min;
+	for(int j = 0; j < _nzn; j++)
+		_CI = int( ( float(rand())/RAND_MAX * _col ) ) + 1;
+	for(int k = 0; k < col(); k++)
+		_SII[i] = ;
 }

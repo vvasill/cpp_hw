@@ -1,0 +1,19 @@
+CC=g++
+CFLAGS=-c
+
+all: test_crs
+
+test_crs: test_crs.o crs_matrix.o linalg.o
+	$(CC) test.o crs_matrix.o linalg.o -o test_crs
+
+test_crs.o: test_crs.cpp
+	$(CC) $(CFLAGS) test_crs.cpp
+
+crs_matrix.o: crs_matrix.cpp
+	$(CC) $(CFLAGS) crs_matrix.cpp
+
+linalg.o: linalg.cpp
+	$(CC) $(CFLAGS) linalg.cpp
+
+clean:
+	rm -rf *.o
