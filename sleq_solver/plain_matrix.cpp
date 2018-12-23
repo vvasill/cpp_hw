@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
+#include <cmath>
 
 #ifndef PLAIN_MATRIX_H
 	#include "plain_matrix.h"
@@ -53,7 +54,7 @@ plain_matrix::~plain_matrix()
 //=======================================================
 //operators
 
-matrix* plain_matrix::operator= (const matrix* that)
+plain_matrix* plain_matrix::operator= (const plain_matrix* that)
 {
 	if (this != that)
 	{	
@@ -101,7 +102,7 @@ matrix* plain_matrix::operator- (const matrix* that) const
 
 		for(int i = 0; i < row(); i++)
 			for(int j = 0; j < col(); j++)
-				res_ptr->set(i, j, get(i,j) + that->get(i,j));
+				res_ptr->set(i, j, get(i,j) - that->get(i,j));
 
 		return res_ptr; 
 	}
@@ -179,26 +180,19 @@ void plain_matrix::init(double num)
 			set(i, j, num);
 }
 
-double plain_matrix::max()
+matrix* plain_matrix::tr() const
 {
-	int max = 0;
+	plain_matrix* res_ptr = new plain_matrix(row(), col());
 	for(int i = 0; i < row(); i++)
 		for(int j = 0; j < col(); j++)
-			if (get(i,j) > max)
-				max = get(i,j);
-	return max;
+			res_ptr->set(j, i, get(i,j));
+	return res_ptr;
 }
 
-pla_matrix int_matrix::tr() const
+matrix* plain_matrix::abs()
 {
-	int_matrix result = int_matrix(size(), row());
 	for(int i = 0; i < row(); i++)
 		for(int j = 0; j < col(); j++)
-			result.set_el(j, i, get_el(i,j));
-	return result;
+			set(i, j, fabs(-1));
+	print();
 }
-
-/*matrix* sub(matrix*, matrix*)
-{
-	return 
-}*/

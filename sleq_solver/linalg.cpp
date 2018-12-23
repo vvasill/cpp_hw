@@ -47,16 +47,37 @@ bool min_res(matrix* a, matrix* x, matrix* x_old)
 	for (int i = 0; i < row; i++)    
 		x->set(i, 0, x_old->get(i,0) + 2*eps);
 
-	temp = a->max();
-
-	((*x) + x)->print();
-
-	/*while ( max( abs(sub(x, x_old)) ) > eps )
+	max(x);
+		
+	while (delta(x, x_old) > eps)
 	{
-		cout << eps;
-	}*/
+		cout << "***" << endl;
+		delta(x, x_old);
+		exit(0);
+	}
 
 	//smth
 
 	return true;
+}
+
+double delta(const matrix* x, const matrix* y)
+{
+	double delta = 0;
+	
+	//delta = max( ((*x) - y)->abs() );
+
+	return delta;
+}
+
+double max(const matrix* x)
+{
+	double max = 0;
+	for(int i = 0; i < x->row(); i++)
+		for(int j = 0; j < x->col(); j++)
+		{
+			if (x->get(i,j) >= max)
+				max = x->get(i,j);
+		}
+	return max;
 }

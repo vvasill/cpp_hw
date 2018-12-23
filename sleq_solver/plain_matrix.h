@@ -23,10 +23,10 @@ class plain_matrix : public matrix
 		virtual void set(int, int, double);
 		virtual void print() const;
 		virtual void init(double);
-		virtual double max();
-		//virtual matrix* sub(matrix*, matrix*);
+		virtual matrix* tr() const;
+		virtual matrix* abs();
 
-		virtual matrix* operator= (const matrix* that);	
+		plain_matrix* operator= (const plain_matrix* that);	
 		virtual matrix* operator+ (const matrix* that) const;		
 		virtual matrix* operator- (const matrix* that) const;	
 		virtual matrix* operator* (const matrix* that) const;

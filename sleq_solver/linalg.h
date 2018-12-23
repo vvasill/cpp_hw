@@ -7,5 +7,7 @@
 
 bool gauss(matrix*, matrix*);
 bool min_res(matrix*, matrix*, matrix*);
+double max(const matrix*);
+double delta(const matrix*, const matrix*);
 
 #endif // LINALG_H
