@@ -16,7 +16,7 @@ class matrix
 
 		//virtual matrix* operator= (const matrix* that) = 0;
 		virtual matrix* operator+ (const matrix* that) const = 0;		
-		//virtual matrix& operator- (const matrix& that) const = 0;	
+		virtual matrix* operator- (const matrix* that) const = 0;	
 };
 
 #endif // MATRIX_H

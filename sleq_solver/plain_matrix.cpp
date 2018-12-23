@@ -93,7 +93,7 @@ matrix* plain_matrix::operator+ (const matrix* that) const
 		throw length_error("operation is forbidden");
 }
 
-plain_matrix plain_matrix::operator- (const plain_matrix& that) const
+matrix* plain_matrix::operator- (const matrix* that) const
 {
 	if (col() == that->col() and row() == that->row()) 
 	{ 
