@@ -43,12 +43,14 @@ bool min_res(matrix* a, matrix* x, matrix* x_old)
 
 	double eps = 0.001;
 	x_old->init(1.0);
-	x = x_old + 2*eps;
+	
+	for (int i = 0; i < row; i++)    
+		x->set(i, 0, x_old->get(i,0) + 2*eps);
 
-	while (x - x_old > eps)
+	/*while ( max( abs(sub(x, x_old)) ) > eps )
 	{
 		cout << eps;
-	}
+	}*/
 
 	//smth
 

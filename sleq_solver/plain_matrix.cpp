@@ -53,9 +53,9 @@ plain_matrix::~plain_matrix()
 //=======================================================
 //operators
 
-plain_matrix& plain_matrix::operator= (const plain_matrix& that)
+/*plain_matrix* plain_matrix::operator= (const plain_matrix* that)
 {
-	if (this != &that)
+	if (this != that)
 	{	
 		if (_arr != NULL)	
 		{
@@ -64,30 +64,30 @@ plain_matrix& plain_matrix::operator= (const plain_matrix& that)
 			delete [] _arr;
 		}
 	
-		_row = that.row();
-		_col = that.col();
+		_row = that->row();
+		_col = that->col();
 		_arr = new double*[_row];
     	for (int i = 0; i < _row; i++)
         	_arr[i] = new double [_col];
 
 		for(int i = 0; i < _row; i++)
 			for (int j = 0; j < _col; j++)
-				_arr[i][j] = that._arr[i][j];
+				_arr[i][j] = that->_arr[i][j];
 	}
-	return *this;
-}
+	return this;
+}*/
 
-/*plain_matrix plain_matrix::operator+ (const plain_matrix& that) const
+/*plain_matrix* plain_matrix::operator+ (const plain_matrix& that) const
 {
-	if (col() == that.col() and row() == that.row()) 
+	if (col() == that->col() and row() == that->row()) 
 	{ 
-		plain_matrix result = plain_matrix(row(), col());
+		plain_matrix* res_ptr = new plain_matrix(row(), col());
 
 		for(int i = 0; i < row(); i++)
 			for(int j = 0; j < col(); j++)
-				result.set(i, j, get(i,j) + that.get(i,j));
+				res_ptr->set(i, j, get(i,j) + that->get(i,j));
 
-		return result; 
+		return res_ptr; 
 	}
 	else
 		throw length_error("operation is forbidden");
@@ -163,3 +163,9 @@ void plain_matrix::init(double num)
 		for(int j = 0; j < col(); j++)
 			set(i, j, num);
 }
+
+/*int plain_matrix::max(plain_matrix* that)
+{
+	int temp = 0;
+	return 1;
+}*/

@@ -10,6 +10,10 @@
 	#include "plain_matrix.h"
 #endif
 
+#ifndef PLAIN_MATRIX_H
+	#include "crs_matrix.h"
+#endif
+
 using namespace std;
 
 int main(int argc, char* argv[])	
@@ -22,6 +26,9 @@ int main(int argc, char* argv[])
 	f_in.open("ex1.txt");
 	f_in >> n;
 	
+	//=======================================================
+	//plain_matrix testing
+
 	matrix *x_ptr = new plain_matrix(n, 1);
 	matrix *x_temp_ptr = new plain_matrix(n, 1);
 	matrix *a_ptr = new plain_matrix(n, n+1);
@@ -43,8 +50,19 @@ int main(int argc, char* argv[])
 	cout << "answer:" << endl;
 	x_ptr->print();
 
-	delete a_ptr;
 	delete x_ptr;
 	delete x_temp_ptr;
+	
+	//=======================================================
+	//crs_matrix testing
+
+	/*matrix *x_ptr = new crs_matrix(n, 1);
+	gauss(a_ptr, x_ptr);
+	cout << "answer:" << endl;
+	x_ptr->print();*/
+
+	delete a_ptr;
+	delete x_ptr;
+
 	return 0;	
 }
