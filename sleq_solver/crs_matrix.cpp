@@ -26,9 +26,9 @@ crs_matrix::crs_matrix(int n, int m, int nzn)
 	_row = n;
 	_col = m;
 	_nzn = nzn;
-	_MEl = NULL;
-	_CI = NULL;
-	_SII = NULL;
+	_MEl = new double[_nzn];
+	_CI = new int[_nzn];
+	_SII = new int[_row + 1];
 }
 
 crs_matrix::crs_matrix(int n, int m, int k, double* a, int* b, int* c)
@@ -36,7 +36,6 @@ crs_matrix::crs_matrix(int n, int m, int k, double* a, int* b, int* c)
 	_row = n;
 	_col = m;
 	_nzn = k;
-
 	_MEl = new double[_nzn];
 	_CI = new int[_nzn];
 	_SII = new int[_row + 1];
@@ -48,16 +47,6 @@ crs_matrix::crs_matrix(int n, int m, int k, double* a, int* b, int* c)
 	}
 	for (int i = 0; i < _row + 1; i++)
 		_SII[i] = c[i];	 
-
-	for (int i = 0; i < _nzn; i++)
-		cout << _MEl[i] << " ";
-	cout << endl;
-	for (int i = 0; i < _nzn; i++)
-		cout << _CI[i] << " ";
-	cout << endl;
-	for (int i = 0; i < _row + 1; i++)
-		cout << _SII[i] << " ";
-	cout << endl;
 }
 
 crs_matrix::crs_matrix(int n, int m, double** that)
@@ -269,13 +258,13 @@ double crs_matrix::get(int i, int j) const
 {
 	if (i < row() and j < col())
 	{
-		double temp;
+		double temp = 0;
     	for (int k = _SII[i]; k < _SII[i + 1]; k++)
 		{
     	    if (_CI[k] == j)
     	        temp = _MEl[k];
 		}
-    	return temp;
+		return temp;
 	}
 	else
 		throw invalid_argument("index out of range");
