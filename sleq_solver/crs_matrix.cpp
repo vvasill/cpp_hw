@@ -277,11 +277,13 @@ void crs_matrix::set(int i, int j, double num)
 		if (get(i, j) == 0) 
 		{
 			//smth
+			cout << "crs_set_1_problem" << endl;
 			exit(0);
 		}
 		if (num == 0)
 		{
 			//smth
+			cout << "crs_set_2_problem" << endl;
 			exit(0);
 		}
 		else
@@ -351,5 +353,6 @@ matrix* crs_matrix::tr() const
 matrix* crs_matrix::abs()
 {
 	//smth
+	cout << "crs_abs_problem" << endl;
 	exit(0);
 }

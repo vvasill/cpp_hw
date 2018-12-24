@@ -45,12 +45,12 @@ int main(int argc, char* argv[])
 	//=======================================================
 	//linalg with crs_matrix testing
 	
-	matrix *a_ptr = new crs_matrix(4, 4, 6);
+	matrix *a_ptr = new crs_matrix(4, 4, 6, m1, m2, m3);
 	matrix *x_ptr = new crs_matrix(4, 1, 4);
 	
-	/*gauss(a_ptr, x_ptr);
+	gauss(a_ptr, x_ptr);
 	cout << "answer:" << endl;
-	x_ptr->print();*/	
+	x_ptr->print();
 
 	delete a_ptr;
 	delete x_ptr;
