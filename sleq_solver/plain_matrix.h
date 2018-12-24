@@ -22,9 +22,9 @@ class plain_matrix : public matrix
 		virtual double get(int, int) const;
 		virtual void set(int, int, double);
 		virtual void print() const;
-		virtual void init(double);
 		virtual matrix* tr() const;
 		virtual matrix* abs();
+		void init(double);
 
 		plain_matrix* operator= (const plain_matrix* that);	
 		virtual matrix* operator+ (const matrix* that) const;		

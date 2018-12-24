@@ -21,8 +21,11 @@ int main(int argc, char* argv[])
 	//=======================================================
 	//crs_matrix testing
 
-	matrix *a_ptr = new crs_matrix(n, n+1, );
-	a_ptr->init(1,10);
+	crs_matrix *a = new crs_matrix(6, 6, 12);
+	matrix *a_ptr;
+	a_ptr = a;
+	
+	a->init();
 
 	cout << "input:" << endl;
 	a_ptr->print();
@@ -35,9 +38,8 @@ int main(int argc, char* argv[])
 	matrix *x_ptr = new crs_matrix(n, 1);
 	gauss(a_ptr, x_ptr);
 	cout << "answer:" << endl;
-	x_ptr->print();
+	x_ptr->print();*/
 	
-	delete x_ptr;
 	delete a_ptr;
 
 	return 0;	

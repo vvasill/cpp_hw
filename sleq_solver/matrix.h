@@ -9,7 +9,6 @@ class matrix
 		virtual double get(int, int) const = 0;
 		virtual void set(int, int, double) = 0;		
 		virtual void print() const = 0;	
-		virtual void init(double) = 0;
 		virtual matrix* tr() const = 0;
 		virtual matrix* abs() = 0;
 

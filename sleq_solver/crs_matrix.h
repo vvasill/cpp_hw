@@ -16,18 +16,21 @@ class crs_matrix : public matrix
 		int* _SII;
 	public:
 		crs_matrix();
-		crs_matrix(const int, const int, const int);
-		crs_matrix(const int, const int, const int, double*, double*, double*);
-		crs_matrix(const int, const int, const double**);
-		crs_matrix(const crs_matrix&);
+		crs_matrix(int, int, int);
+		crs_matrix(int, int, int, double*, double*, double*);
+		crs_matrix(int, int, double**);
+		crs_matrix(const crs_matrix*);
 		~crs_matrix();		
 	
 		virtual int row() const;
 		virtual int col() const;
+		int nzn() const;
 		virtual double get(int, int) const;
 		virtual void set(int, int, double);
 		virtual void print() const;
-		void init(const int, const int);
+		virtual matrix* tr() const;
+		virtual matrix* abs();
+		void init();
 	
 		crs_matrix* operator= (const crs_matrix* that);	
 		virtual matrix* operator+ (const matrix* that) const;		
