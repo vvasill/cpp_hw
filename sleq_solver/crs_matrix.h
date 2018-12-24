@@ -17,7 +17,7 @@ class crs_matrix : public matrix
 	public:
 		crs_matrix();
 		crs_matrix(int, int, int);
-		crs_matrix(int, int, int, double*, double*, double*);
+		crs_matrix(int, int, int, double*, int*, int*);
 		crs_matrix(int, int, double**);
 		crs_matrix(const crs_matrix*);
 		~crs_matrix();		

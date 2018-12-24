@@ -28,16 +28,18 @@ crs_matrix::crs_matrix(int n, int m, int nzn)
 	_nzn = nzn;
 	_MEl = NULL;
 	_CI = NULL;
-	_SII = new int[_row + 1];
-	for (int i = 0; i < _row + 1; i++)
-        _SII[i] = 0;
+	_SII = NULL;
 }
 
-crs_matrix::crs_matrix(int n, int m, int k, double* a, double* b, double* c)
+crs_matrix::crs_matrix(int n, int m, int k, double* a, int* b, int* c)
 {
 	_row = n;
 	_col = m;
 	_nzn = k;
+
+	_MEl = new double[_nzn];
+	_CI = new int[_nzn];
+	_SII = new int[_row + 1];
 
 	for (int i = 0; i < _nzn; i++)
 	{
@@ -46,6 +48,16 @@ crs_matrix::crs_matrix(int n, int m, int k, double* a, double* b, double* c)
 	}
 	for (int i = 0; i < _row + 1; i++)
 		_SII[i] = c[i];	 
+
+	for (int i = 0; i < _nzn; i++)
+		cout << _MEl[i] << " ";
+	cout << endl;
+	for (int i = 0; i < _nzn; i++)
+		cout << _CI[i] << " ";
+	cout << endl;
+	for (int i = 0; i < _row + 1; i++)
+		cout << _SII[i] << " ";
+	cout << endl;
 }
 
 crs_matrix::crs_matrix(int n, int m, double** that)
@@ -217,6 +229,12 @@ crs_matrix* crs_matrix::operator* (const crs_matrix* that)
 
 //----------------------------------------------------------------------
 //problem
+matrix* crs_matrix::operator+ (const matrix* that)
+{
+	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
+	return res_ptr;
+}
+
 matrix* crs_matrix::operator- (const matrix* that)
 {
 	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
@@ -253,8 +271,10 @@ double crs_matrix::get(int i, int j) const
 	{
 		double temp;
     	for (int k = _SII[i]; k < _SII[i + 1]; k++)
+		{
     	    if (_CI[k] == j)
     	        temp = _MEl[k];
+		}
     	return temp;
 	}
 	else
