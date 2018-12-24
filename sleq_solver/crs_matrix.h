@@ -32,10 +32,15 @@ class crs_matrix : public matrix
 		virtual matrix* abs();
 		void init();
 	
-		crs_matrix* operator= (const crs_matrix* that);	
-		virtual matrix* operator+ (const matrix* that);		
-		virtual matrix* operator- (const matrix* that) const;	
-		virtual matrix* operator* (const matrix* that) const;
+		crs_matrix* operator= (const crs_matrix* that);
+	
+		virtual matrix* operator+ (const matrix* that);
+		virtual matrix* operator- (const matrix* that);	
+		virtual matrix* operator* (const matrix* that);
+	
+		crs_matrix* operator+ (const crs_matrix* that);	
+		crs_matrix* operator- (const crs_matrix* that);	
+		crs_matrix* operator* (const crs_matrix* that);
 };
 
 #endif // CRS_MATRIX_H

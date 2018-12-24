@@ -4,7 +4,7 @@ CFLAGS=-c
 all: test_crs
 
 test_crs: test_crs.o crs_matrix.o linalg.o
-	$(CC) test.o crs_matrix.o linalg.o -o test_crs
+	$(CC) test_crs.o crs_matrix.o linalg.o -o test_crs
 
 test_crs.o: test_crs.cpp
 	$(CC) $(CFLAGS) test_crs.cpp

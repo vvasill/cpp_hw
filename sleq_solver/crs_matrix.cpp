@@ -39,7 +39,7 @@ crs_matrix::crs_matrix(int n, int m, int k, double* a, double* b, double* c)
 	_col = m;
 	_nzn = k;
 
-	for (int i = 0; i < _row + 1; i++)
+	for (int i = 0; i < _nzn; i++)
 	{
 		_MEl[i] = a[i];
 		_CI[i] = b[i];
@@ -125,7 +125,7 @@ crs_matrix* crs_matrix::operator= (const crs_matrix* that)
 	return this;
 }
 
-matrix* operator+ (const matrix* that)
+crs_matrix* crs_matrix::operator+ (const crs_matrix* that)
 {
 	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
 
@@ -139,20 +139,21 @@ matrix* operator+ (const matrix* that)
         res_ptr->_SII[0] = 0;
 
 		for (int i = 0; i < _nzn + that->_nzn; i++)
-			res_ptr->CI[i] = 0;
+			res_ptr->_CI[i] = 0;
 	
 		int *temp = new int[_col];
       	for (int i = 0; i < _col; i++)
           	temp[i] = 0;
        
-		 for (int k = 0; k < _row; k++) {
-            for (int j = _SII[k]; j < _SII[k + 1]; j++)
-                temp[_CI[j]] = 1;
+		for (int k = 0; k < _row; k++)
+		{
+    		for (int j = _SII[k]; j < _SII[k + 1]; j++)
+    			temp[_CI[j]] = 1;
 
-			for (int j = that->SII[l]; j < that->SII[l + 1]; j++)
+			for (int j = that->_SII[k]; j < that->_SII[k + 1]; j++)
 				temp[that->_CI[j]] = 1;
 	
-			for (int i = 0; i < _col(); i++)
+			for (int i = 0; i < _col; i++)
 				if (temp[i] == 1) 
 				{
                     res_ptr->_CI[d] = i;
@@ -160,16 +161,16 @@ matrix* operator+ (const matrix* that)
                     d++;
                 }
 
-            res_ptr->SII[l + 1] = d;
+            res_ptr->_SII[k + 1] = d;
         }
 
         if (d < _nzn + that->_nzn)
 		{
             int *tmp_CI = new int[d];
             for (int i = 0; i < d; i++)
-                tmp_CI[i] = res_ptr->CI[i];
+                tmp_CI[i] = res_ptr->_CI[i];
             
-            delete [] res_ptr->CI;
+            delete [] res_ptr->_CI;
             res_ptr->_CI = tmp_CI;
         }
 
@@ -186,7 +187,7 @@ matrix* operator+ (const matrix* that)
             for (int j = _SII[l]; j < _SII[l + 1]; j++) 	
 				temp_el[_CI[j]] = _MEl[j];
 
-            for (int j = that->SII[l]; j < that->_SII[l + 1]; j++)
+            for (int j = that->_SII[l]; j < that->_SII[l + 1]; j++)
             	temp_el[that->_CI[j]] += that->_MEl[j];
 
             for (int i = res_ptr->_SII[l]; i < res_ptr->_SII[l + 1]; i++)	
@@ -202,13 +203,27 @@ matrix* operator+ (const matrix* that)
 		throw length_error("operation is forbidden");
 }
 
-matrix* operator- (const matrix* that) const
+crs_matrix* crs_matrix::operator- (const crs_matrix* that)
 {
 	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
 	return res_ptr;
 }
 
-matrix* operator* (const matrix* that) const
+crs_matrix* crs_matrix::operator* (const crs_matrix* that)
+{
+	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
+	return res_ptr;
+}
+
+//----------------------------------------------------------------------
+//problem
+matrix* crs_matrix::operator- (const matrix* that)
+{
+	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
+	return res_ptr;
+}
+
+matrix* crs_matrix::operator* (const matrix* that)
 {
 	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
 	return res_ptr;
@@ -252,32 +267,8 @@ void crs_matrix::set(int i, int j, double num)
 	{
 		if (get(i, j) == 0) 
 		{
-			_SII[_row]++;
-    		double *tmp_MEl = new double[_SII[_row]];
-    		int *tmp_CI = new int[_SII[_row]];
-    		for (int k = 0; k < _SII[_row]; k++) 
-			{
-				tmp_MEl[k] = _MEl[k];
-				tmp_CI[k] = _CI[k];
-    		}
-		
-			tmp_MEl[k] = num;
-			tmp_CI[k] = j;
-	
-			for (int m = k + 1; m < _SI[_row]; m++) 
-			{
-				tmp_MEl[m] = _MEl[m - 1];
-        		tmp_CI[m] = _CI[m - 1];
-  			}
-	
-			for (k = i; k < Nstr - 1; k++) 
-				_SI[k + 1]++;
-	
-			delete [] _MEl;
-			delete [] _CI;
-
-			_MEl = tmp_MEl;
-			_CI = tmp_CI;
+			//smth
+			exit(0);
 		}
 		if (num == 0)
 		{
@@ -327,23 +318,29 @@ matrix* crs_matrix::tr() const
 		res_ptr->_SII[i] = 0;
 
     for (int i = 0; i < _nzn; i++)
-		res_ptr->_SII[_CII[i] + 1]++;
+		res_ptr->_SII[_CI[i] + 1]++;
 
     for (int i = 0; i < res_ptr->_row; i++)
         res_ptr->_SII[i + 1] += res_ptr->_SII[i];
 
     for (int i = 0; i < _row; i++)
-        for (int j = A.StrInpt[i]; j < A.StrInpt[i + 1]; j++)
+        for (int j = _SII[i]; j < _SII[i + 1]; j++)
 		{
 			res_ptr->_MEl[res_ptr->_SII[_CI[j]]] = _MEl[j];
-			res_ptr->_CI[res_ptr->SII[_CI[j]]] = i;
+			res_ptr->_CI[res_ptr->_SII[_CI[j]]] = i;
 			res_ptr->_SII[_CI[j]]++;
         }
 
     for (int i = res_ptr->_row; i > 0; i--)
         res_ptr->_SII[i] = res_ptr->_SII[i - 1];
 	
-    res_ptr->SII[0] = 0;
+    res_ptr->_SII[0] = 0;
 
     return res_ptr;
+}
+
+matrix* crs_matrix::abs()
+{
+	//smth
+	exit(0);
 }

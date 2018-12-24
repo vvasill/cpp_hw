@@ -34,6 +34,8 @@ int main(int argc, char* argv[])
 	(matrix.tr()*matrix2).print_matrix();
 	cout << endl;
 	(matrix*matrix2.tr()).print_matrix();
+	
+	matrix2 = matrix.tr();
 
 	return 0;	
 }
