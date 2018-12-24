@@ -42,7 +42,10 @@ bool min_res(matrix* a, matrix* x, matrix* x_old)
 	int col = a->col();
 
 	double eps = 0.001;
-	x_old->init(1.0);
+
+	for(int i = 0; i < x_old->row(); i++)
+		for(int j = 0; j < x_old->col(); j++)
+			x_old->set(i, j, 1.0);
 	
 	for (int i = 0; i < row; i++)    
 		x->set(i, 0, x_old->get(i,0) + 2*eps);

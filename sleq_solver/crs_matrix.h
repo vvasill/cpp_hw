@@ -8,9 +8,9 @@
 class crs_matrix : public matrix
 {
 	private:
-		int _row = 0;
-    	int _col = 0;
-		int _nzn = 0;
+		int _row;
+    	int _col;
+		int _nzn;
 		double* _MEl;
 		int* _CI;
 		int* _SII;
@@ -33,7 +33,7 @@ class crs_matrix : public matrix
 		void init();
 	
 		crs_matrix* operator= (const crs_matrix* that);	
-		virtual matrix* operator+ (const matrix* that) const;		
+		virtual matrix* operator+ (const matrix* that);		
 		virtual matrix* operator- (const matrix* that) const;	
 		virtual matrix* operator* (const matrix* that) const;
 };

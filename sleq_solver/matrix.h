@@ -12,9 +12,9 @@ class matrix
 		virtual matrix* tr() const = 0;
 		virtual matrix* abs() = 0;
 
-		virtual matrix* operator+ (const matrix* that) const = 0;		
-		virtual matrix* operator- (const matrix* that) const = 0;	
-		virtual matrix* operator* (const matrix* that) const = 0;
+		virtual matrix* operator+ (const matrix* that) = 0;		
+		virtual matrix* operator- (const matrix* that) = 0;	
+		virtual matrix* operator* (const matrix* that) = 0;
 };
 
 #endif // MATRIX_H

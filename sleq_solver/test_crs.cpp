@@ -21,11 +21,10 @@ int main(int argc, char* argv[])
 	//=======================================================
 	//crs_matrix testing
 
-	crs_matrix *a = new crs_matrix(6, 6, 12);
-	matrix *a_ptr;
-	a_ptr = a;
-	
-	a->init();
+	double m1[6] = {1, 5, 2, 3, 7, 9};
+	double m2[6] = {1, 0, 3, 2, 1, 3};
+	double m3[6] = {0, 1, 3, 4, 6};
+	matrix *a_ptr = new crs_matrix(6, 6, 12, m1, m2, m3);	
 
 	cout << "input:" << endl;
 	a_ptr->print();

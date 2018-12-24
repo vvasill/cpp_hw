@@ -24,12 +24,11 @@ class plain_matrix : public matrix
 		virtual void print() const;
 		virtual matrix* tr() const;
 		virtual matrix* abs();
-		void init(double);
 
 		plain_matrix* operator= (const plain_matrix* that);	
-		virtual matrix* operator+ (const matrix* that) const;		
-		virtual matrix* operator- (const matrix* that) const;	
-		virtual matrix* operator* (const matrix* that) const;
+		virtual matrix* operator+ (const matrix* that);		
+		virtual matrix* operator- (const matrix* that);	
+		virtual matrix* operator* (const matrix* that);
 };
 
 #endif // PLAIN_MATRIX_H

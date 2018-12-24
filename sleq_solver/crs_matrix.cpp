@@ -28,7 +28,7 @@ crs_matrix::crs_matrix(int n, int m, int nzn)
 	_nzn = nzn;
 	_MEl = NULL;
 	_CI = NULL;
-	_SII = new double[_row + 1];
+	_SII = new int[_row + 1];
 	for (int i = 0; i < _row + 1; i++)
         _SII[i] = 0;
 }
@@ -37,9 +37,15 @@ crs_matrix::crs_matrix(int n, int m, int k, double* a, double* b, double* c)
 {
 	_row = n;
 	_col = m;
-	_nzn = 0;
+	_nzn = k;
 
-	//smth
+	for (int i = 0; i < _row + 1; i++)
+	{
+		_MEl[i] = a[i];
+		_CI[i] = b[i];
+	}
+	for (int i = 0; i < _row + 1; i++)
+		_SII[i] = c[i];	 
 }
 
 crs_matrix::crs_matrix(int n, int m, double** that)
@@ -56,15 +62,15 @@ crs_matrix::crs_matrix(const crs_matrix* that)
 	_row = that->row();
 	_col = that->col();
 	_nzn = that->nzn();
-	_MEl = new double*[_nzn];
-	_CI = new double*[_nzn];
-	_SII = new double*[_row + 1];
+	_MEl = new double[_nzn];
+	_CI = new int[_nzn];
+	_SII = new int[_row + 1];
 
 	for(int i = 0; i < _nzn; i++)
 		_MEl[i] = that->_MEl[i];
-	for(int j = 0; j < _nzn; j++)
+	for(int i = 0; i < _nzn; i++)
 		_CI[i] = that->_CI[i];
-	for(int j = 0; j < _row+1; j++)
+	for(int i = 0; i < _row+1; i++)
 		_SII[i] = that->_SII[i];
 }
 
@@ -83,7 +89,7 @@ crs_matrix::~crs_matrix()
 
 crs_matrix* crs_matrix::operator= (const crs_matrix* that)
 {
-	if ((_col == that->_col) and (_str == that->_str) and (_nzn == that->_nzn)) 
+	if ((_row == that->_row) and (_col == that->_col) and (_nzn == that->_nzn)) 
 	{
 		for (int i = 0; i < _nzn; i++) 
 		{
@@ -119,7 +125,7 @@ crs_matrix* crs_matrix::operator= (const crs_matrix* that)
 	return this;
 }
 
-matrix* operator+ (const matrix* that) const
+matrix* operator+ (const matrix* that)
 {
 	crs_matrix* res_ptr = new crs_matrix(row(), col(), nzn());
 
@@ -297,13 +303,6 @@ void crs_matrix::print() const
 			cout << get(i, j) << " ";
 		cout << endl;
 	}
-}
-
-void crs_matrix::init()
-{
-	_MEl = {1, 5, 2, 3, 7, 9};
-	_CI = {1, 0, 3, 2, 1, 3};
-	_SII = {0, 1, 3, 4, 6};
 }
 
 matrix* crs_matrix::tr() const

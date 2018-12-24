@@ -78,7 +78,7 @@ plain_matrix* plain_matrix::operator= (const plain_matrix* that)
 	return this;
 }
 
-matrix* plain_matrix::operator+ (const matrix* that) const
+matrix* plain_matrix::operator+ (const matrix* that)
 {
 	if (col() == that->col() and row() == that->row()) 
 	{ 
@@ -94,7 +94,7 @@ matrix* plain_matrix::operator+ (const matrix* that) const
 		throw length_error("operation is forbidden");
 }
 
-matrix* plain_matrix::operator- (const matrix* that) const
+matrix* plain_matrix::operator- (const matrix* that)
 {
 	if (col() == that->col() and row() == that->row()) 
 	{ 
@@ -110,7 +110,7 @@ matrix* plain_matrix::operator- (const matrix* that) const
 		throw length_error("operation is forbidden");
 }
 
-matrix* plain_matrix::operator* (const matrix* that) const
+matrix* plain_matrix::operator* (const matrix* that)
 {
 	if	(col() == that->row())
 	{
@@ -171,13 +171,6 @@ void plain_matrix::print() const
 			cout << get(i, j) << " ";
 		cout << endl;
 	}
-}
-
-void plain_matrix::init(double num)
-{
-	for(int i = 0; i < row(); i++)
-		for(int j = 0; j < col(); j++)
-			set(i, j, num);
 }
 
 matrix* plain_matrix::tr() const
